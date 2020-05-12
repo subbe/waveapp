@@ -68,4 +68,12 @@ GQL;
 query { accountSubtypes { name value type { name normalBalanceType value } } }
 GQL;
     }
+    
+    public static function customerExists() {
+        return <<<GQL
+query(\$businessId: ID!, \$customerId: ID!) { business(id: \$businessId) {  customer(id: \$customerId) { id name } } }
+GQL;
+    }
+    
+    
 }
