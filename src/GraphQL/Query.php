@@ -78,7 +78,7 @@ GQL;
     public static function products()
     {
         return <<<GQL
-query { products { id name description unitPrice isSold isBought isArchived } }
+query(\$businessId: ID!) { business(id: \$businessId) { products { id name description unitPrice isSold isBought isArchived } } }
 GQL;
     }    
     
