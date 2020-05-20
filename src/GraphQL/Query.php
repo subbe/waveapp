@@ -78,7 +78,7 @@ GQL;
     public static function products()
     {
         return <<<GQL
-query ($bid: ID!) { business(id: $bid) { products { edges { node { name description unitPrice } } } } }
+query ($businessId: ID!) { business(id: $businessId) { products { edges { node { name description unitPrice } } } } }
 GQL;
     }    
     
