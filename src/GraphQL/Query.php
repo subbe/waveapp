@@ -75,5 +75,12 @@ query(\$businessId: ID!, \$customerId: ID!) { business(id: \$businessId) {  cust
 GQL;
     }
     
+    public static function products()
+    {
+        return <<<GQL
+query { products { id name description unitPrice isSold isBought isArchived } }
+GQL;
+    }    
+    
     
 }
