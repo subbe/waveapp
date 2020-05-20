@@ -82,5 +82,11 @@ query (\$businessId: ID!) { business(id: \$businessId) { products { edges { node
 GQL;
     }    
     
+ 
+    public static function taxes() {
+        return <<<GQL
+query ($businessId: ID!) { business(id: $businessId) { salesTaxes { edges { node { id name rate } } } } }
+GQL;
+    }
     
 }
