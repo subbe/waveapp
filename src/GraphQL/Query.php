@@ -89,4 +89,11 @@ query (\$businessId: ID!) { business(id: \$businessId) { salesTaxes { edges { no
 GQL;
     }
     
+    public static function invoicesByCustomer() {
+        return <<<GQL
+query(\$businessId: ID!, \$customerId: ID!, \$page: Int!, \$pageSize: Int!) {
+  business(id: \$businessId) { id customer(id: \$customerId) { id invoices(page: \$page, pageSize: \$pageSize) { pageInfo { currentPage totalPages totalCount } edges { node { id createdAt modifiedAt pdfUrl viewUrl status title subhead invoiceNumber invoiceDate poNumber currency { code } dueDate amountDue { value currency { symbol } } amountPaid { value currency { symbol } } taxTotal { value currency { symbol } } total { value currency { symbol } } exchangeRate footer memo disableCreditCardPayments disableBankPayments itemTitle unitTitle priceTitle amountTitle lastSentAt lastSentVia lastViewedAt } } } } } }
+GQL;
+    }
+    
 }
