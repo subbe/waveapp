@@ -91,8 +91,8 @@ GQL;
     
     public static function invoicesByCustomerByStatus() {
         return <<<GQL
-query ListInvoicesByStatus ($businessId: ID!, $customerId: ID!, $invoiceStatus: InvoiceStatus!) {
-  business(id: $businessId) { id invoices(customerId: $customerId, status: $invoiceStatus) { edges { node { id createdAt modifiedAt pdfUrl viewUrl status title subhead invoiceNumber invoiceDate poNumber  currency { code } dueDate  amountDue { value currency { symbol } }  amountPaid { value currency { symbol } }  taxTotal { value currency { symbol } }  total { value currency { symbol } }  exchangeRate footer memo disableCreditCardPayments disableBankPayments itemTitle unitTitle priceTitle amountTitle lastSentAt lastSentVia lastViewedAt  } } } } }  
+query ListInvoicesByStatus (\$businessId: ID!, \$customerId: ID!, \$invoiceStatus: InvoiceStatus!) {
+  business(id: \$businessId) { id invoices(customerId: \$customerId, status: \$invoiceStatus) { edges { node { id createdAt modifiedAt pdfUrl viewUrl status title subhead invoiceNumber invoiceDate poNumber  currency { code } dueDate  amountDue { value currency { symbol } }  amountPaid { value currency { symbol } }  taxTotal { value currency { symbol } }  total { value currency { symbol } }  exchangeRate footer memo disableCreditCardPayments disableBankPayments itemTitle unitTitle priceTitle amountTitle lastSentAt lastSentVia lastViewedAt  } } } } }  
 GQL;
     }
     
