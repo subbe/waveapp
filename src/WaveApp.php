@@ -17,23 +17,31 @@ class WaveApp
     private $client;
     private $headers;
     private $url;
+    private $token;
+    private $businessId;
+    
     /**
      * @var ResponseBuilder
      */
     private $responseBuilder;
 
-    public function __construct()
+    public function __construct($graphqlUrl = null, $token = null, $businessId = null)
     {
-        if (empty(config('waveapp.access_token'))) {
-            throw new Exception("Please set wave app's access token.", 400);
+        $this->token = ($token ? $token : config('waveapp.access_token'));
+        if (empty($this->token)) {
+            throw new Exception("Please provide wave app's token", 400);
         }
-        if (empty(config('waveapp.graphql_uri'))) {
-            throw new Exception("Please set wave app's graphql uri.", 400);
+        
+        $this->url = ($graphqlUrl ? $graphqlUrl : config('waveapp.graphql_uri'));
+        if (empty($this->url)) {
+            throw new Exception("Please provide wave app's graphql uri", 400);
         }
+        
+        $this->businessId = ($businessId ? $businessId : config('waveapp.business_id'));
+        
         $this->client = new Client();
-        $this->url = config('waveapp.graphql_uri');
         $this->headers = [
-            'Authorization' => 'Bearer ' . config('waveapp.access_token'),
+            'Authorization' => 'Bearer ' . $this->token,
         ];
         $this->responseBuilder = new ResponseBuilder();
     }
