@@ -3,7 +3,6 @@
 
 namespace Subbe\WaveApp;
 
-
 class ResponseBuilder
 {
     public function success($res)

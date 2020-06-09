@@ -3,7 +3,6 @@
 
 namespace Subbe\WaveApp\GraphQL;
 
-
 class Query
 {
     public static function user()
@@ -68,34 +67,33 @@ GQL;
 query { accountSubtypes { name value type { name normalBalanceType value } } }
 GQL;
     }
-    
-    public static function customerExists() {
+
+    public static function customerExists()
+    {
         return <<<GQL
 query(\$businessId: ID!, \$customerId: ID!) { business(id: \$businessId) {  customer(id: \$customerId) { id name } } }
 GQL;
     }
-    
+
     public static function products()
     {
         return <<<GQL
 query (\$businessId: ID!) { business(id: \$businessId) { products { edges { node { id name description unitPrice isSold isBought isArchived } } } } }
 GQL;
-    }    
-    
- 
-    public static function taxes() {
+    }
+
+    public static function taxes()
+    {
         return <<<GQL
 query (\$businessId: ID!) { business(id: \$businessId) { salesTaxes { edges { node { id name rate } } } } }
 GQL;
     }
-    
-    public static function invoicesByCustomerByStatus() {
+
+    public static function invoicesByCustomerByStatus()
+    {
         return <<<GQL
 query ListInvoicesByStatus (\$businessId: ID!, \$customerId: ID!, \$invoiceStatus: InvoiceStatus!) {
   business(id: \$businessId) { id invoices(customerId: \$customerId, status: \$invoiceStatus) { edges { node { id createdAt modifiedAt pdfUrl viewUrl status title subhead invoiceNumber invoiceDate poNumber  currency { code } dueDate  amountDue { value currency { symbol } }  amountPaid { value currency { symbol } }  taxTotal { value currency { symbol } }  total { value currency { symbol } }  exchangeRate footer memo disableCreditCardPayments disableBankPayments itemTitle unitTitle priceTitle amountTitle lastSentAt lastSentVia lastViewedAt  } } } } }  
 GQL;
     }
-    
-    
-    
 }

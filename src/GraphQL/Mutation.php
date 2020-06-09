@@ -3,7 +3,6 @@
 
 namespace Subbe\WaveApp\GraphQL;
 
-
 class Mutation
 {
     public static function customerCreate()
@@ -102,7 +101,6 @@ GQL;
         return <<<GQL
 mutation MoneyTransactionCreateInput(\$input: MoneyTransactionCreateInput!) { moneyTransactionCreate(input: \$input) { transaction { id } didSucceed inputErrors { path message code } } }
 GQL;
-
     }
 
     public static function invoiceCreate()
