@@ -3,7 +3,6 @@
 
 namespace Subbe\WaveApp;
 
-
 use Exception;
 use GuzzleHttp\Client;
 use Subbe\WaveApp\GraphQL\Mutation;
@@ -11,15 +10,12 @@ use Subbe\WaveApp\GraphQL\Query;
 
 class WaveApp
 {
-    /**
-     * @var Client
-     */
     private $client;
     private $headers;
     private $url;
     private $token;
     private $businessId;
-    
+
     /**
      * @var ResponseBuilder
      */
@@ -31,14 +27,14 @@ class WaveApp
         if (empty($this->token)) {
             throw new Exception("Please provide wave app's token", 400);
         }
-        
+
         $this->url = ($graphqlUrl ? $graphqlUrl : config('waveapp.graphql_uri'));
         if (empty($this->url)) {
             throw new Exception("Please provide wave app's graphql uri", 400);
         }
-        
+
         $this->businessId = ($businessId ? $businessId : config('waveapp.business_id'));
-        
+
         $this->client = new Client();
         $this->headers = [
             'Authorization' => 'Bearer ' . $this->token,
@@ -59,10 +55,10 @@ class WaveApp
         $operationName = null;
 
         if (count($arguments) == 2) {
-            if (!is_string($arguments[1])) {
+            if (! is_string($arguments[1])) {
                 throw new Exception("Operation name is expected to be a string.", 422);
             }
-            if (!$this->is_assoc($arguments[0])) {
+            if (! $this->is_assoc($arguments[0])) {
                 throw new Exception("Variables are expected to be an associative array.", 422);
             }
             $query = Mutation::$name();
@@ -95,7 +91,7 @@ class WaveApp
 
     private function is_assoc($arr)
     {
-        if (!is_array($arr)) {
+        if (! is_array($arr)) {
             return false;
         }
         return array_keys($arr) !== range(0, count($arr) - 1);
