@@ -77,8 +77,8 @@ GQL;
     
     public static function customers() {
         $ql = "
-query(\$bid: ID!, \$page: Int!, \$pageSize: Int!) {
-  business(id: \$bid) {
+query(\$businessId: ID!, \$page: Int!, \$pageSize: Int!) {
+  business(id: \$businessId) {
     id
     customers(page: \$page, pageSize: \$pageSize, sort: [NAME_ASC]) {
       pageInfo {
