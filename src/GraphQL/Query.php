@@ -40,6 +40,33 @@ GQL;
 query(\$id: ID!) { business(id: \$id) { id name isPersonal organizationalType type { name value } subtype { name value } currency { code symbol name plural exponent } timezone address { addressLine1 addressLine2 city province { code name slug } country { code name currency { code symbol name plural exponent } nameWithArticle } postalCode } phone fax mobile tollFree website isClassicAccounting isClassicInvoicing isArchived createdAt modifiedAt } }
 GQL;
     }
+    
+    
+    public static function customers() 
+    {
+        $ql = "
+query(\$bid: ID!) {
+  business(id: \$bid) {
+    id
+    customers(page: 1, pageSize: 20, sort: [NAME_ASC]) {
+      pageInfo {
+        currentPage
+        totalPages
+        totalCount
+      }
+      edges {
+        node {
+          id
+          name
+          email
+        }
+      }
+    }
+  }
+}";
+        return str_replace(array("\r", "\n"), '', $ql);
+    }
+    
 
     public static function currencies()
     {
