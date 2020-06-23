@@ -77,10 +77,10 @@ GQL;
     
     public static function customers() {
         $ql = "
-query(\$bid: ID!) {
+query(\$bid: ID!, \$page: Int!, \$pageSize: Int!) {
   business(id: \$bid) {
     id
-    customers(page: 1, pageSize: 500, sort: [NAME_ASC]) {
+    customers(page: \$page, pageSize: \$pageSize, sort: [NAME_ASC]) {
       pageInfo {
         currentPage
         totalPages
