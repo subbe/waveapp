@@ -75,6 +75,32 @@ query(\$businessId: ID!, \$customerId: ID!) { business(id: \$businessId) {  cust
 GQL;
     }
     
+    public static function customers() {
+        $ql = "
+query(\$bid: ID!) {
+  business(id: \$bid) {
+    id
+    customers(page: 1, pageSize: 500, sort: [NAME_ASC]) {
+      pageInfo {
+        currentPage
+        totalPages
+        totalCount
+      }
+      edges {
+        node {
+          id
+          name
+          email
+        }
+      }
+    }
+  }
+}";
+        return str_replace(array("\r", "\n"), '', $ql);
+    }
+    
+
+    
     public static function products()
     {
         return <<<GQL
