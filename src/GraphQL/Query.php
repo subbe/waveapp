@@ -115,11 +115,134 @@ query (\$businessId: ID!) { business(id: \$businessId) { salesTaxes { edges { no
 GQL;
     }
     
+    
+//                    return <<<GQL
+// query ListInvoicesByStatus (\$businessId: ID!, \$customerId: ID!, \$invoiceStatus: InvoiceStatus!) {
+//   business(id: \$businessId) { id invoices(customerId: \$customerId, status: \$invoiceStatus) { edges { node { id createdAt modifiedAt pdfUrl viewUrl status title subhead invoiceNumber invoiceDate poNumber  currency { code } dueDate  amountDue { value currency { symbol } }  amountPaid { value currency { symbol } }  taxTotal { value currency { symbol } }  total { value currency { symbol } }  exchangeRate footer memo disableCreditCardPayments disableBankPayments itemTitle unitTitle priceTitle amountTitle lastSentAt lastSentVia lastViewedAt  } } } } }  
+// GQL;
+
     public static function invoicesByCustomerByStatus() {
-        return <<<GQL
-query ListInvoicesByStatus (\$businessId: ID!, \$customerId: ID!, \$invoiceStatus: InvoiceStatus!) {
-  business(id: \$businessId) { id invoices(customerId: \$customerId, status: \$invoiceStatus) { edges { node { id createdAt modifiedAt pdfUrl viewUrl status title subhead invoiceNumber invoiceDate poNumber  currency { code } dueDate  amountDue { value currency { symbol } }  amountPaid { value currency { symbol } }  taxTotal { value currency { symbol } }  total { value currency { symbol } }  exchangeRate footer memo disableCreditCardPayments disableBankPayments itemTitle unitTitle priceTitle amountTitle lastSentAt lastSentVia lastViewedAt  } } } } }  
-GQL;
+        $ql = "
+query ListInvoicesByStatus (\$businessId: ID!, \$customerId: ID!, \$invoiceStatus: InvoiceStatus!, \$page: Int!, \$pageSize: Int!) {
+  business(id: \$businessId) {
+    id
+    isClassicInvoicing
+    invoices(customerId: \$customerId, status: \$invoiceStatus, page: \$page, pageSize: \$pageSize) {
+      pageInfo {
+        currentPage
+        totalPages
+        totalCount
+      }
+      edges {
+        node {
+          id
+          createdAt
+          modifiedAt
+          pdfUrl
+          viewUrl
+          status
+          title
+          subhead
+          invoiceNumber
+          invoiceDate
+          poNumber
+          customer {
+            id
+            name
+            # Can add additional customer fields here
+          }
+          currency {
+            code
+          }
+          dueDate
+          amountDue {
+            value
+            currency {
+              symbol
+            }
+          }
+          amountPaid {
+            value
+            currency {
+              symbol
+            }
+          }
+          taxTotal {
+            value
+            currency {
+              symbol
+            }
+          }
+          total {
+            value
+            currency {
+              symbol
+            }
+          }
+          exchangeRate
+          footer
+          memo
+          disableCreditCardPayments
+          disableBankPayments
+          itemTitle
+          unitTitle
+          priceTitle
+          amountTitle
+          hideName
+          hideDescription
+          hideUnit
+          hidePrice
+          hideAmount
+          items {
+            product {
+              id
+              name
+              # Can add additional product fields here
+            }
+            description
+            quantity
+            price
+            subtotal {
+              value
+              currency {
+                symbol
+              }
+            }
+            total {
+              value
+              currency {
+                symbol
+              }
+            }
+            account {
+              id
+              name
+              subtype {
+                name
+                value
+              }
+              # Can add additional account fields here
+            }
+            taxes {
+              amount {
+                value
+              }
+              salesTax {
+                id
+                name
+                # Can add additional sales tax fields here
+              }
+            }
+          }
+          lastSentAt
+          lastSentVia
+          lastViewedAt
+        }
+      }
+    }
+  }
+}";
+        return str_replace(array("\r", "\n"), '', $ql);        
     }
     
     
