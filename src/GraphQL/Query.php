@@ -145,7 +145,6 @@ query ListInvoicesByStatus (\$businessId: ID!, \$customerId: ID!, \$invoiceStatu
           customer {
             id
             name
-            # Can add additional customer fields here
           }
           currency {
             code
@@ -193,7 +192,6 @@ query ListInvoicesByStatus (\$businessId: ID!, \$customerId: ID!, \$invoiceStatu
             product {
               id
               name
-              # Can add additional product fields here
             }
             description
             quantity
@@ -217,7 +215,6 @@ query ListInvoicesByStatus (\$businessId: ID!, \$customerId: ID!, \$invoiceStatu
                 name
                 value
               }
-              # Can add additional account fields here
             }
             taxes {
               amount {
@@ -226,7 +223,6 @@ query ListInvoicesByStatus (\$businessId: ID!, \$customerId: ID!, \$invoiceStatu
               salesTax {
                 id
                 name
-                # Can add additional sales tax fields here
               }
             }
           }
