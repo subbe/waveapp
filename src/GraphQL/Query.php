@@ -3,7 +3,6 @@
 
 namespace Subbe\WaveApp\GraphQL;
 
-
 class Query
 {
     public static function user()
@@ -68,13 +67,15 @@ GQL;
 query { accountSubtypes { name value type { name normalBalanceType value } } }
 GQL;
     }
-    
-    public static function customerExists() {
+
+    public static function customerExists()
+    {
         return <<<GQL
 query(\$businessId: ID!, \$customerId: ID!) { business(id: \$businessId) {  customer(id: \$customerId) { id name } } }
 GQL;
     }
-    
+  
+  
     public static function customers() {
         $ql = "
 query(\$businessId: ID!, \$page: Int!, \$pageSize: Int!) {
@@ -106,15 +107,14 @@ query(\$businessId: ID!, \$page: Int!, \$pageSize: Int!) {
         return <<<GQL
 query (\$businessId: ID!) { business(id: \$businessId) { products { edges { node { id name description unitPrice isSold isBought isArchived } } } } }
 GQL;
-    }    
-    
- 
-    public static function taxes() {
+    }
+
+    public static function taxes()
+    {
         return <<<GQL
 query (\$businessId: ID!) { business(id: \$businessId) { salesTaxes { edges { node { id name rate } } } } }
 GQL;
     }
-    
     
 
     public static function invoicesByCustomerByStatus() {
@@ -236,7 +236,5 @@ query ListInvoicesByStatus (\$businessId: ID!, \$customerId: ID!, \$invoiceStatu
 }";
         return str_replace(array("\r", "\n"), '', $ql);        
     }
-    
-    
-    
+  
 }
