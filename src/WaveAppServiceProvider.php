@@ -3,7 +3,6 @@
 
 namespace Subbe\WaveApp;
 
-
 use Illuminate\Support\ServiceProvider;
 
 class WaveAppServiceProvider extends ServiceProvider
