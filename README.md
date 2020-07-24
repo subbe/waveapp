@@ -12,7 +12,7 @@ To use WaveApp, you will need to [register][wave-create-an-app] on the developer
 ## Requirement & Install
 Open you composer.json file and add
 ```
-"subbe/waveapp":"0.1"
+"subbe/waveapp":"0.3"
 ```
 and go to the location of your composer file in terminal and run
 ```
