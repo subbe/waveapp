@@ -1,5 +1,7 @@
 # WaveApp
 
+[![StyleCI](https://github.styleci.io/repos/254832967/shield?branch=master)](https://github.styleci.io/repos/254832967?branch=master)
+
 A wrapper to use the [WaveApp][wave-app]'s graphql api in your laravel apps.
 
 The original documentation is available at: 
@@ -27,8 +29,6 @@ WAVE_ACCESS_TOKEN=
 WAVE_GRAPHQL_URI=
 WAVE_BUSINESS_ID=
 ```
-
-
 
 ### Queries
 
