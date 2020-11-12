@@ -40,7 +40,12 @@ WAVE_BUSINESS_ID=
 - currencies
 - currency
 - accountTypes
-- accountSubyypes
+- accountSubtypes
+- customerExists
+- customers
+- products
+- taxes
+- invoicesByCustomerByStatus
 
 ### Mutations
 
@@ -58,8 +63,8 @@ WAVE_BUSINESS_ID=
 
 - salesTaxCreate
 - salesTaxPatch
-- salesTaxRateCreate
 - salesTaxArchive
+- salesTaxRateCreate
 
 - moneyTransactionCreate
 

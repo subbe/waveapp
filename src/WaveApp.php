@@ -1,10 +1,10 @@
 <?php
 
-
 namespace Subbe\WaveApp;
 
 use Exception;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use Subbe\WaveApp\GraphQL\Mutation;
 use Subbe\WaveApp\GraphQL\Query;
 
@@ -78,12 +78,14 @@ class WaveApp
                 'operationName' => $operationName,
 
             ],
-            'headers' => $this->headers
+            'headers' => $this->headers,
         ];
 
         try {
             $res = $this->client->request('POST', $this->url, $options);
             return $this->responseBuilder->success($res);
+        } catch (GuzzleException $e) {
+            return $this->responseBuilder->errors($e);
         } catch (Exception $e) {
             return $this->responseBuilder->errors($e);
         }

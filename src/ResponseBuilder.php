@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Subbe\WaveApp;
 
 class ResponseBuilder
