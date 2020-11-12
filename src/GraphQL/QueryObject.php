@@ -169,6 +169,7 @@ GQL;
     {
         $currency = self::currency();
         $province = self::province();
+
         return <<<GQL
 {
     code
@@ -383,6 +384,5 @@ GQL;
     id
 }
 GQL;
-
     }
 }
