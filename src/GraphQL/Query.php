@@ -7,6 +7,7 @@ class Query
     public static function user()
     {
         $user = QueryObject::user();
+
         return <<<GQL
 query {
     user $user
@@ -103,6 +104,7 @@ GQL;
     public static function accountSubtypes()
     {
         $accountSubtype = QueryObject::accountSubtype();
+
         return <<<GQL
 query { 
     accountSubtypes $accountSubtype 
@@ -166,6 +168,7 @@ GQL;
     public static function taxes()
     {
         $salesTax = QueryObject::salesTax();
+
         return <<<GQL
 query (\$businessId: ID!) { 
     business(id: \$businessId) { 

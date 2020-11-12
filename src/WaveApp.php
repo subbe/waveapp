@@ -9,9 +9,8 @@ use Subbe\WaveApp\GraphQL\Mutation;
 use Subbe\WaveApp\GraphQL\Query;
 
 /**
- * Class WaveApp
+ * Class WaveApp.
  *
- * @package Subbe\WaveApp
  * @method Query user()
  * @method Query countries()
  * @method Query country($params = ['code' => ''])
