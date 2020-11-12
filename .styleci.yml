@@ -1,1 +1,3 @@
 preset: laravel
+disabled:
+  - heredoc_to_nowdoc
