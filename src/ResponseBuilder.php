@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Subbe\WaveApp;
 
 class ResponseBuilder
@@ -14,8 +13,10 @@ class ResponseBuilder
     {
         if ($e->hasResponse()) {
             $response = json_decode($e->getResponse()->getBody(), 1);
+
             return $response['errors'];
         }
+
         return $e->getMessage();
     }
 }
