@@ -12,15 +12,9 @@ To use WaveApp, you will need to [register][wave-create-an-app] on the developer
 
 
 ## Requirement & Install
-Open you composer.json file and add
-```
-"subbe/waveapp":"0.3"
-```
-and go to the location of your composer file in terminal and run
-```
-composer update
-
-php artisan vendor:publish
+Require the package using composer:
+```bash
+composer require subbe/waveapp"
 ```
 
 Update your .env file to include 
@@ -69,25 +63,28 @@ WAVE_BUSINESS_ID=
 - moneyTransactionCreate
 
 - invoiceCreate
+- invoiceClone
 - invoiceDelete
 - invoiceSend
 - invoiceApprove
 - invoiceMarkSent
 
-### How to use
+## Usage
 
-#### Query
-```
+### Query
+```php
 $waveapp = new \Subbe\WaveApp\WaveApp();
 $countries = $waveapp->countries();
+```
 
---- OR ---
-
+or, with parameters...
+```php
+$waveapp = new \Subbe\WaveApp\WaveApp();
 $country = $waveapp->country(['code' => 'US']);
 ```
 
-#### Mutation
-```
+### Mutation
+```php
 $waveapp = new \Subbe\WaveApp\WaveApp();
 $customer = [
     "input" => [
@@ -128,6 +125,12 @@ $customer = [
 
 $newCustomer = $waveapp->customerCreate($customer, "CustomerCreateInput");
 ```
+
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+## License
+[MIT](./LICENSE.md)
 
 [wave-app]: https://www.waveapps.com/
 [wave-documentation-url]: https://developer.waveapps.com/hc/en-us/categories/360001114072

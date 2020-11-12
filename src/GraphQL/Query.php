@@ -6,135 +6,51 @@ class Query
 {
     public static function user()
     {
+        $user = QueryObject::user();
         return <<<GQL
 query {
-    user {
-        id
-        defaultEmail
-        firstName
-        lastName
-        createdAt
-        modifiedAt
-    }
+    user $user
 }
 GQL;
     }
 
     public static function countries()
     {
+        $country = QueryObject::country();
+
         return <<<GQL
 query {
-    countries { 
-        code 
-        name 
-        currency { 
-            code 
-            symbol 
-            name 
-            plural 
-            exponent 
-        } 
-        nameWithArticle 
-        provinces { 
-            code 
-            name 
-        } 
-    } 
+    countries $country
 }
 GQL;
     }
 
     public static function country()
     {
+        $country = QueryObject::country();
+
         return <<<GQL
 query(\$code: CountryCode!) {
-    country(code: \$code) {
-        code
-        name
-        currency {
-            code
-            symbol
-            name
-            plural
-            exponent
-        } 
-        nameWithArticle
-        provinces {
-            code
-            name
-        }
-    }
+    country(code: \$code) $country
 }
 GQL;
     }
 
     public static function businesses()
     {
+        $business = QueryObject::business();
+
         return <<<GQL
 query(\$page: Int!, \$pageSize: Int!) {
-    businesses(page: \$page, pageSize: \$pageSize) {
-        edges { 
-            node { 
-                id 
-                name 
-                isPersonal 
-                organizationalType 
-                type { 
-                    name 
-                    value 
-                } 
-                subtype { 
-                    name 
-                    value 
-                } 
-                currency { 
-                    code 
-                    symbol 
-                    name 
-                    plural 
-                    exponent 
-                } 
-                timezone 
-                address { 
-                    addressLine1 
-                    addressLine2 
-                    city 
-                    province { 
-                        code 
-                        name 
-                        slug 
-                    } 
-                    country { 
-                        code 
-                        name 
-                        currency { 
-                            code 
-                            symbol 
-                            name 
-                            plural 
-                            exponent 
-                        } 
-                        nameWithArticle 
-                    } 
-                    postalCode 
-                } 
-                phone 
-                fax 
-                mobile 
-                tollFree 
-                website 
-                isClassicAccounting 
-                isClassicInvoicing 
-                isArchived 
-                createdAt 
-                modifiedAt 
-            } 
-        } 
+    businesses(page: \$page, pageSize: \$pageSize) { 
         pageInfo { 
             currentPage 
             totalPages 
             totalCount 
-        } 
+        }
+        edges { 
+            node $business
+        }
     } 
 }
 GQL;
@@ -142,136 +58,66 @@ GQL;
 
     public static function business()
     {
+        $business = QueryObject::business();
+
         return <<<GQL
 query(\$id: ID!) { 
-    business(id: \$id) { 
-        id 
-        name 
-        isPersonal 
-        organizationalType 
-        type { 
-            name 
-            value 
-        } 
-        subtype { 
-            name 
-            value 
-        } 
-        currency { 
-            code 
-            symbol 
-            name 
-            plural 
-            exponent 
-        } 
-        timezone 
-        address { 
-            addressLine1 
-            addressLine2 
-            city 
-            province { 
-                code 
-                name 
-                slug 
-            } 
-            country { 
-                code 
-                name 
-                currency { 
-                    code 
-                    symbol 
-                    name 
-                    plural 
-                    exponent 
-                } 
-                nameWithArticle 
-            } 
-            postalCode 
-        } 
-        phone 
-        fax 
-        mobile 
-        tollFree 
-        website 
-        isClassicAccounting 
-        isClassicInvoicing 
-        isArchived 
-        createdAt 
-        modifiedAt 
-    } 
+    business(id: \$id) $business
 }
 GQL;
     }
 
     public static function currencies()
     {
+        $currency = QueryObject::currency();
+
         return <<<GQL
 query { 
-    currencies { 
-        code 
-        symbol 
-        name 
-        plural 
-        exponent 
-    } 
+    currencies $currency
 }
 GQL;
     }
 
     public static function currency()
     {
+        $currency = QueryObject::currency();
+
         return <<<GQL
 query(\$code: CurrencyCode!) { 
-    currency(code: \$code) { 
-        code 
-        symbol 
-        name 
-        plural 
-        exponent 
-    } 
+    currency(code: \$code) $currency
 }
 GQL;
     }
 
     public static function accountTypes()
     {
+        $accountType = QueryObject::accountType();
+
         return <<<GQL
 query { 
-    accountTypes { 
-        name 
-        normalBalanceType 
-        value 
-    } 
+    accountTypes $accountType 
 }
 GQL;
     }
 
     public static function accountSubtypes()
     {
+        $accountSubtype = QueryObject::accountSubtype();
         return <<<GQL
 query { 
-    accountSubtypes { 
-        name 
-        value 
-        type { 
-            name 
-            normalBalanceType 
-            value 
-        } 
-    } 
+    accountSubtypes $accountSubtype 
 }
 GQL;
     }
 
     public static function customerExists()
     {
+        $customer = QueryObject::customer();
+
         return <<<GQL
 query(\$businessId: ID!, \$customerId: ID!) { 
     business(id: \$businessId) {
-        customer(id: \$customerId) { 
-            id 
-            name 
-        } 
+        customer(id: \$customerId) $customer 
     } 
 }
 GQL;
@@ -279,6 +125,8 @@ GQL;
 
     public static function customers()
     {
+        $customers = QueryObject::customer();
+
         return <<<GQL
 query(\$businessId: ID!, \$page: Int!, \$pageSize: Int!) {
   business(id: \$businessId) {
@@ -290,11 +138,7 @@ query(\$businessId: ID!, \$page: Int!, \$pageSize: Int!) {
         totalCount
       }
       edges {
-        node {
-          id
-          name
-          email
-        }
+        node $customers
       }
     }
   }
@@ -304,39 +148,30 @@ GQL;
 
     public static function products()
     {
+        $product = QueryObject::product();
+
         return <<<GQL
-query (\$businessId: ID!) { 
-    business(id: \$businessId) { 
-        products { 
-            edges { 
-                node { 
-                    id 
-                    name 
-                    description 
-                    unitPrice 
-                    isSold 
-                    isBought 
-                    isArchived 
-                } 
-            } 
-        } 
-    } 
+query (\$businessId: ID!) {
+    business(id: \$businessId) {
+        products {
+            edges {
+                node $product
+            }
+        }
+    }
 }
 GQL;
     }
 
     public static function taxes()
     {
+        $salesTax = QueryObject::salesTax();
         return <<<GQL
 query (\$businessId: ID!) { 
     business(id: \$businessId) { 
         salesTaxes { 
             edges { 
-                node { 
-                    id 
-                    name 
-                    rate 
-                } 
+                node $salesTax
             } 
         } 
     } 
@@ -346,6 +181,8 @@ GQL;
 
     public static function invoicesByCustomerByStatus()
     {
+        $invoice = QueryObject::invoice();
+
         return <<<GQL
 query ListInvoicesByStatus (\$businessId: ID!, \$customerId: ID!, \$invoiceStatus: InvoiceStatus!, \$page: Int!, \$pageSize: Int!) {
     business(id: \$businessId) {
@@ -358,106 +195,7 @@ query ListInvoicesByStatus (\$businessId: ID!, \$customerId: ID!, \$invoiceStatu
                 totalCount
             }
             edges {
-                node {
-                    id
-                    createdAt
-                    modifiedAt
-                    pdfUrl
-                    viewUrl
-                    status
-                    title
-                    subhead
-                    invoiceNumber
-                    invoiceDate
-                    poNumber
-                    customer {
-                        id
-                        name
-                    }
-                    currency {
-                        code
-                    }
-                    dueDate
-                    amountDue {
-                        value
-                        currency {
-                            symbol
-                        }
-                    }
-                    amountPaid {
-                        value
-                        currency {
-                            symbol
-                        }
-                    }
-                    taxTotal {
-                        value
-                        currency {
-                            symbol
-                        }
-                    }
-                    total {
-                        value
-                        currency {
-                            symbol
-                        }
-                    }
-                    exchangeRate
-                    footer
-                    memo
-                    disableCreditCardPayments
-                    disableBankPayments
-                    itemTitle
-                    unitTitle
-                    priceTitle
-                    amountTitle
-                    hideName
-                    hideDescription
-                    hideUnit
-                    hidePrice
-                    hideAmount
-                    items {
-                        product {
-                            id
-                            name
-                        }
-                        description
-                        quantity
-                        price
-                        subtotal {
-                            value
-                            currency {
-                                symbol
-                            }
-                        }
-                        total {
-                            value
-                            currency {
-                                symbol
-                            }
-                        }
-                        account {
-                            id
-                            name
-                            subtype {
-                                name
-                                value
-                            }
-                        }
-                        taxes {
-                            amount {
-                                value
-                            }
-                            salesTax {
-                                id
-                                name
-                            }
-                        }
-                    }
-                    lastSentAt
-                    lastSentVia
-                    lastViewedAt
-                }
+                node $invoice
             }
         }
     }
