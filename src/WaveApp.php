@@ -37,7 +37,7 @@ class WaveApp
 
         $this->client = new Client();
         $this->headers = [
-            'Authorization' => 'Bearer ' . $this->token,
+            'Authorization' => 'Bearer '.$this->token,
         ];
         $this->responseBuilder = new ResponseBuilder();
     }
@@ -56,10 +56,10 @@ class WaveApp
 
         if (count($arguments) == 2) {
             if (! is_string($arguments[1])) {
-                throw new Exception("Operation name is expected to be a string.", 422);
+                throw new Exception('Operation name is expected to be a string.', 422);
             }
             if (! $this->is_assoc($arguments[0])) {
-                throw new Exception("Variables are expected to be an associative array.", 422);
+                throw new Exception('Variables are expected to be an associative array.', 422);
             }
             $query = Mutation::$name();
             $variables = $arguments[0];
@@ -83,6 +83,7 @@ class WaveApp
 
         try {
             $res = $this->client->request('POST', $this->url, $options);
+
             return $this->responseBuilder->success($res);
         } catch (GuzzleException $e) {
             return $this->responseBuilder->errors($e);
@@ -96,6 +97,7 @@ class WaveApp
         if (! is_array($arr)) {
             return false;
         }
+
         return array_keys($arr) !== range(0, count($arr) - 1);
     }
 }
