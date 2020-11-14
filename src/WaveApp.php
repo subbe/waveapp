@@ -4,27 +4,38 @@ namespace Subbe\WaveApp;
 
 use Exception;
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
 use Subbe\WaveApp\GraphQL\Mutation;
 use Subbe\WaveApp\GraphQL\Query;
 
 /**
  * Class WaveApp.
- *
  * @method Query user()
  * @method Query countries()
  * @method Query country($params = ['code' => ''])
- * @method Query businesses($params = ['page' => '', 'pageSize' => ''])
+ * @method Query businesses($params = ['page' => 1, 'pageSize' => 10])
  * @method Query business($params = ['id' => ''])
  * @method Query currencies()
  * @method Query currency($params = ['code' => ''])
  * @method Query accountTypes()
  * @method Query accountSubTypes()
  * @method Query customerExists($params = ['businessId' => '', 'customerId' => ''])
- * @method Query customers($params = ['businessId' => '', 'page' => '', 'pageSize' => ''])
+ * @method Query customers($params = ['businessId' => '', 'page' => 1, 'pageSize' => 10])
  * @method Query products($params = ['businessId' => ''])
  * @method Query taxes($params = ['businessId' => ''])
- * @method Query invoicesByCustomerByStatus($params = ['businessId' => '', 'customerId' => '', 'invoiceStatus' => '', 'page' => '', 'pageSize' => ''])
+ * @method Query invoicesByCustomerByStatus($params = ['businessId' => '', 'customerId' => '', 'invoiceStatus' => '', 'page' => 1, 'pageSize' => 10])
+ * @method Query getBusiness($params = ['business_id' => '', 'account_page' => 1, 'account_page_size' => 10, 'customer_page' => 1, 'customer_page_size' => 10, 'invoice_page' => 1, 'invoice_page_size' => 10, 'tax_page' => 1, 'tax_page_size' => 10, 'product_page' => 1, 'product_page_size' => 10, 'vendor_page' => 1, 'vendor_page_size' => 10])
+ * @method Query businessAccounts($params = ['business_id' => '', 'account_page' => 1, 'account_page_size' => 10])
+ * @method Query getBusinessAccount($params = ['business_id' => '', 'account_id' => ''])
+ * @method Query businessCustomers($params = ['business_id' => '', 'customer_page' => 1, 'customer_page_size' => 10])
+ * @method Query getBusinessCustomer($params = ['business_id' => '', 'customer_id' => ''])
+ * @method Query businessInvoices($params = ['business_id' => '', 'invoice_page' => 1, 'invoice_page_size' => 10])
+ * @method Query getBusinessInvoices($params = ['business_id' => '', 'invoice_id' => ''])
+ * @method Query businessSalesTaxes($params = ['business_id' => '', 'tax_page' => 1, 'tax_page_size' => 10])
+ * @method Query getBusinessSalesTax($params = ['business_id' => '', 'tax_id' => ''])
+ * @method Query businessProducts($params = ['business_id' => '', 'product_page' => 1, 'product_page_size' => 10])
+ * @method Query getBusinessProduct($params = ['business_id' => '', 'product_id' => ''])
+ * @method Query businessVendors($params = ['business_id' => '', 'vendor_page' => 1, 'vendor_page_size' => 10])
+ * @method Query getBusinessVendor($params = ['business_id' => '', 'vendor_id' => ''])
  * @method Mutation customerCreate($input, $operation_name = 'CustomerCreateInput')
  * @method Mutation customerPatch($input, $operation_name = 'CustomerPatchInput')
  * @method Mutation customerDelete($input, $operation_name = 'CustomerDeleteInput')
@@ -48,26 +59,23 @@ use Subbe\WaveApp\GraphQL\Query;
  */
 class WaveApp
 {
-    private $client;
-    private $headers;
-    private $url;
-    private $token;
-    private $businessId;
-
-    /**
-     * @var ResponseBuilder
-     */
+    protected $client;
+    protected $headers;
+    protected $url;
+    protected $token;
+    protected $businessId;
     private $responseBuilder;
 
     /**
      * WaveApp constructor.
      *
+     * @param  \GuzzleHttp\Client|null  $client
      * @param  null  $graphqlUrl
      * @param  null  $token
      * @param  null  $businessId
-     * @throws \Exception
+     * @throws Exception
      */
-    public function __construct($graphqlUrl = null, $token = null, $businessId = null)
+    public function __construct(Client $client = null, $graphqlUrl = null, $token = null, $businessId = null)
     {
         $this->token = ($token ? $token : config('waveapp.access_token'));
         if (empty($this->token)) {
@@ -81,7 +89,7 @@ class WaveApp
 
         $this->businessId = ($businessId ? $businessId : config('waveapp.business_id'));
 
-        $this->client = new Client();
+        $this->client = $client ?: new Client();
         $this->headers = [
             'Authorization' => 'Bearer '.$this->token,
         ];
@@ -128,11 +136,9 @@ class WaveApp
         ];
 
         try {
-            $res = $this->client->request('POST', $this->url, $options);
+            $response = $this->client->post($this->url, $options);
 
-            return $this->responseBuilder->success($res);
-        } catch (GuzzleException $e) {
-            return $this->responseBuilder->errors($e);
+            return $this->responseBuilder->success($response);
         } catch (Exception $e) {
             return $this->responseBuilder->errors($e);
         }

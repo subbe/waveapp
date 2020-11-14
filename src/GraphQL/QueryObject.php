@@ -7,14 +7,12 @@ class QueryObject
     public static function user()
     {
         return <<<GQL
-{
-    id
-    defaultEmail
-    firstName
-    lastName
-    createdAt
-    modifiedAt
-}
+id
+defaultEmail
+firstName
+lastName
+createdAt
+modifiedAt
 GQL;
     }
 
@@ -27,49 +25,63 @@ GQL;
         $invoiceItem = self::invoiceItems();
 
         return <<<GQL
-{
-    business $business
-    customer $customer
-    id
-    createdAt
-    modifiedAt
-    source {
-        __typename
-    }
-    pdfUrl
-    viewUrl
-    status
-    title
-    subhead
-    invoiceNumber
-    poNumber
-    invoiceDate
-    dueDate
-    amountDue $money
-    amountPaid $money
-    taxTotal $money
-    total $money
-    currency $currency
-    exchangeRate
-    items $invoiceItem
-    memo
-    footer
-    disableCreditCardPayments
-    disableBankPayments
-    disableAmexPayments
-    itemTitle
-    unitTitle
-    priceTitle
-    amountTitle
-    hideName
-    hideDescription
-    hideUnit
-    hidePrice
-    hideAmount
-    lastSentAt
-    lastSentVia
-    lastViewedAt
+business {
+    $business
 }
+customer {
+    $customer
+}
+id
+createdAt
+modifiedAt
+source {
+    __typename
+}
+pdfUrl
+viewUrl
+status
+title
+subhead
+invoiceNumber
+poNumber
+invoiceDate
+dueDate
+amountDue {
+    $money
+}
+amountPaid {
+    $money
+}
+taxTotal {
+    $money
+}
+total {
+    $money
+}
+currency {
+    $currency
+}
+exchangeRate
+items {
+    $invoiceItem
+}
+memo
+footer
+disableCreditCardPayments
+disableBankPayments
+disableAmexPayments
+itemTitle
+unitTitle
+priceTitle
+amountTitle
+hideName
+hideDescription
+hideUnit
+hidePrice
+hideAmount
+lastSentAt
+lastSentVia
+lastViewedAt
 GQL;
     }
 
@@ -81,60 +93,60 @@ GQL;
         $address = self::address();
 
         return <<<GQL
-{ 
-    id 
-    name 
-    isPersonal 
-    organizationalType 
-    type $businessType
-    subtype $businessSubType 
-    currency $currency
-    timezone 
-    address $address 
-    phone 
-    fax 
-    mobile 
-    tollFree 
-    website 
-    isClassicAccounting 
-    isClassicInvoicing 
-    isArchived 
-    createdAt 
-    modifiedAt 
+id 
+name 
+isPersonal 
+organizationalType 
+type {
+    $businessType
 }
+subtype {
+    $businessSubType
+} 
+currency { 
+    $currency 
+}
+timezone 
+address {
+    $address
+} 
+phone 
+fax 
+mobile 
+tollFree 
+website 
+isClassicAccounting 
+isClassicInvoicing 
+isArchived 
+createdAt 
+modifiedAt
 GQL;
     }
 
     public static function businessType()
     {
         return <<<GQL
-{
-    name
-    value
-}
+name
+value
 GQL;
     }
 
     public static function businessSubType()
     {
         return <<<GQL
-{
-    name
-    value
-}
+name
+value
 GQL;
     }
 
     public static function currency()
     {
         return <<<GQL
-{ 
-    code 
-    symbol 
-    name 
-    plural 
-    exponent 
-}
+code 
+symbol 
+name 
+plural 
+exponent 
 GQL;
     }
 
@@ -144,24 +156,24 @@ GQL;
         $country = self::country();
 
         return <<<GQL
-{ 
-    addressLine1 
-    addressLine2 
-    city 
-    province $province
-    country $country 
-    postalCode 
+addressLine1 
+addressLine2 
+city 
+province {
+    $province
 }
+country {
+    $country
+} 
+postalCode 
 GQL;
     }
 
     public static function province()
     {
         return <<<GQL
-{ 
-    code 
-    name 
-}
+code 
+name 
 GQL;
     }
 
@@ -171,12 +183,14 @@ GQL;
         $province = self::province();
 
         return <<<GQL
-{
-    code
-    name
-    currency $currency
-    nameWithArticle
-    provinces $province
+code
+name
+currency {
+    $currency
+}
+nameWithArticle
+provinces {
+    $province
 }
 GQL;
     }
@@ -189,27 +203,33 @@ GQL;
         $shippingDetails = self::shippingDetails();
 
         return <<<GQL
-{
-    business $business
-    id
-    name
-    address $address
-    firstName
-    lastName
-    displayId
-    email
-    mobile
-    phone
-    fax
-    tollFree
-    website
-    internalNotes
-    currency $currency
-    shippingDetails $shippingDetails
-    createdAt
-    modifiedAt
-    isArchived
+business {
+    $business
 }
+id
+name
+address {
+    $address
+}
+firstName
+lastName
+displayId
+email
+mobile
+phone
+fax
+tollFree
+website
+internalNotes
+currency {
+    $currency
+}
+shippingDetails {
+    $shippingDetails
+}
+createdAt
+modifiedAt
+isArchived
 GQL;
     }
 
@@ -218,12 +238,12 @@ GQL;
         $address = self::address();
 
         return <<<GQL
-{
-    name
-    address $address
-    phone
-    instructions
+name
+address {
+    $address
 }
+phone
+instructions
 GQL;
     }
 
@@ -232,10 +252,10 @@ GQL;
         $currency = self::currency();
 
         return <<<GQL
-{
-    raw
-    value
-    currency $currency
+raw
+value
+currency {
+    $currency
 }
 GQL;
     }
@@ -243,20 +263,28 @@ GQL;
     public static function invoiceItems()
     {
         $account = self::account();
+        $money = self::money();
         $taxes = self::invoiceItemTax();
         $product = self::product();
-        $money = self::money();
 
         return <<<GQL
-{
-    account $account
-    description
-    quantity
-    unitPrice
-    subtotal $money
-    total $money
-    taxes $taxes
-    product $product
+account {
+    $account
+}
+description
+quantity
+unitPrice
+subtotal {
+    $money
+}
+total {
+    $money
+}
+taxes {
+    $taxes
+}
+product {
+    $product
 }
 GQL;
     }
@@ -265,36 +293,40 @@ GQL;
     {
         $business = self::business();
         $currency = self::currency();
-        $type = self::accountType();
-        $subtype = self::accountSubtype();
+        $accountType = self::accountType();
+        $accountSubtype = self::accountSubtype();
 
         return <<<GQL
-{
-    business $business
-    id
-    name
-    description
-    displayId
-    currency $currency
-    type $type
-    subtype $subtype
-    normalBalanceType
-    isArchived
-    sequence
-    balance
-    balanceInBusinessCurrency
+business {
+    $business
 }
+id
+name
+description
+displayId
+currency {
+    $currency
+}
+type {
+    $accountType
+}
+subtype {
+    $accountSubtype
+}
+normalBalanceType
+isArchived
+sequence
+balance
+balanceInBusinessCurrency
 GQL;
     }
 
     public static function accountType()
     {
         return <<<GQL
-{ 
-    name 
-    normalBalanceType 
-    value 
-}
+name 
+normalBalanceType 
+value 
 GQL;
     }
 
@@ -303,11 +335,11 @@ GQL;
         $accountType = self::accountType();
 
         return <<<GQL
-{ 
-        name 
-        value 
-        type $accountType 
-    }
+name 
+value 
+type {
+    $accountType
+} 
 GQL;
     }
 
@@ -317,10 +349,12 @@ GQL;
         $salesTax = self::salesTax();
 
         return <<<GQL
-{
-    amount $money
-    rate
-    salesTax $salesTax
+amount {
+    $money
+}
+rate
+salesTax {
+    $salesTax
 }
 GQL;
     }
@@ -331,58 +365,92 @@ GQL;
         $salesTaxRate = self::salesTaxRate();
 
         return <<<GQL
-{
-    business $business
-    id
-    name
-    abbreviation
-    description
-    taxNumber
-    showTaxNumberOnInvoices
-    rate
-    rates $salesTaxRate
-    isCompound
-    isRecoverable
-    isArchived
-    createdAt
-    modifiedAt
-} 
+business {
+    $business
+}
+id
+name
+abbreviation
+description
+taxNumber
+showTaxNumberOnInvoices
+rate
+rates {
+    $salesTaxRate
+}
+isCompound
+isRecoverable
+isArchived
+createdAt
+modifiedAt
 GQL;
     }
 
     public static function salesTaxRate()
     {
         return <<<GQL
-{
-    effective
-    rate
-}
+effective
+rate
 GQL;
     }
 
     public static function product()
     {
         return <<<GQL
-{ 
-    id 
-    name 
-    description 
-    unitPrice 
-    isSold 
-    isBought 
-    isArchived 
-    createdAt
-    modifiedAt
-}
+id 
+name 
+description 
+unitPrice 
+isSold 
+isBought 
+isArchived 
+createdAt
+modifiedAt
 GQL;
     }
 
     public static function transaction()
     {
         return <<<GQL
-{
-    id
+id
+GQL;
+    }
+
+    public static function vendor()
+    {
+        $business = self::business();
+        $address = self::address();
+        $currency = self::currency();
+        $shippingDetails = self::shippingDetails();
+
+        return <<<GQL
+business {
+    $business
 }
+id
+name
+address {
+    $address
+}
+firstName
+lastName
+displayId
+email
+mobile
+phone
+fax
+tollFree
+website
+internalNotes
+currency {
+    $currency
+}
+shippingDetails {
+    $shippingDetails
+}
+createdAt
+modifiedAt
+isArchived
 GQL;
     }
 }

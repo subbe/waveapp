@@ -1,6 +1,6 @@
 {
   "name": "subbe/waveapp",
-  "description": "Laravel integration to consume Wave's API which is built using GraphQL",
+  "description": "A Wrapper to consume WaveApp's GraphQL API",
   "type": "project",
   "license": "MIT",
   "authors": [
@@ -18,6 +18,11 @@
   "require": {
     "guzzlehttp/guzzle": "~6.0"
   },
+  "autoload-dev": {
+    "psr-4": {
+      "Subbe\\WaveApp\\Tests\\": "tests/"
+    }
+  },
   "extra": {
     "laravel": {
       "providers": [
@@ -27,5 +32,9 @@
         "WaveApp": "Subbe\\WaveApp\\WaveApp"
       }
     }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.5@dev",
+    "orchestra/testbench": "~3.0"
   }
 }
