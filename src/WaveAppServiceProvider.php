@@ -10,11 +10,15 @@ class WaveAppServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/../config/waveapp.php' => config_path('waveapp.php'),
-        ]);
+        ], 'config');
     }
 
     public function register()
     {
-        parent::register();
+        $this->app->bind('wave-app', function () {
+            return new WaveApp();
+        });
+
+        $this->mergeConfigFrom(__DIR__.'/../config/waveapp.php', 'wave-app');
     }
 }
