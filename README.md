@@ -40,6 +40,19 @@ WAVE_BUSINESS_ID=
 - products
 - taxes
 - invoicesByCustomerByStatus
+- getBusiness
+- businessAccounts
+- getBusinessAccount
+- businessCustomers
+- getBusinessCustomer
+- businessInvoices
+- getBusinessInvoices
+- businessSalesTaxes
+- getBusinessSalesTax
+- businessProducts
+- getBusinessProduct
+- businessVendors
+- getBusinessVendor
 
 ### Mutations
 
