@@ -1,6 +1,8 @@
 # WaveApp
 
-[![StyleCI](https://github.styleci.io/repos/254832967/shield?branch=master)](https://github.styleci.io/repos/254832967?branch=master)
+[![StyleCI](https://github.styleci.io/repos/254832967/shield?style=flat&branch=master)](https://github.styleci.io/repos/254832967?branch=master)
+[![Build Status](https://travis-ci.com/subbe/waveapp.svg?branch=master)](https://travis-ci.com/subbe/waveapp)
+[![codecov](https://codecov.io/gh/subbe/waveapp/branch/master/graph/badge.svg)](https://codecov.io/gh/subbe/waveapp)
 
 A wrapper to use the [WaveApp][wave-app]'s graphql api in your laravel apps.
 
