@@ -16,7 +16,7 @@ To use WaveApp, you will need to [register][wave-create-an-app] on the developer
 ## Requirement & Install
 Require the package using composer:
 ```bash
-composer require subbe/waveapp"
+composer require subbe/waveapp
 ```
 
 Update your .env file to include 
