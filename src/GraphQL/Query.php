@@ -77,6 +77,8 @@ query(\$id: ID!) {
 }
 GQL;
     }
+    
+    
 
     public static function currencies()
     {
