@@ -1,13 +1,13 @@
 <?php
 
 
-namespace Subbe\WaveApp;
+namespace Murraycollingwood\WaveApp;
 
 
 use Exception;
 use GuzzleHttp\Client;
-use Subbe\WaveApp\GraphQL\Mutation;
-use Subbe\WaveApp\GraphQL\Query;
+use Murraycollingwood\WaveApp\GraphQL\Mutation;
+use Murraycollingwood\WaveApp\GraphQL\Query;
 
 class WaveApp
 {
