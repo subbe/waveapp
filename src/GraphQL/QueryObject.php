@@ -203,10 +203,7 @@ GQL;
         $shippingDetails = self::shippingDetails();
 
         return <<<GQL
-business {
-    $business
-}
-id
+{id
 name
 address {
     $address
@@ -230,6 +227,7 @@ shippingDetails {
 createdAt
 modifiedAt
 isArchived
+    }
 GQL;
     }
 
