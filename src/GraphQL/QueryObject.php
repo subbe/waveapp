@@ -16,7 +16,6 @@ extraData
 createdAt
 modifiedAt
 GQL;
-
     }
 
     public static function user()
