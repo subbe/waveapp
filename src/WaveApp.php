@@ -9,6 +9,7 @@ use Subbe\WaveApp\GraphQL\Query;
 
 /**
  * Class WaveApp.
+ *
  * @method Query OAuthApplication()
  * @method Query currencies()
  * @method Query currency($params = ['code' => ''])
@@ -75,6 +76,7 @@ class WaveApp
      * @param  null  $graphqlUrl
      * @param  null  $token
      * @param  null  $businessId
+     *
      * @throws Exception
      */
     public function __construct(Client $client = null, $graphqlUrl = null, $token = null, $businessId = null)
@@ -102,6 +104,7 @@ class WaveApp
      * @param $method
      * @param $params
      * @return mixed|string
+     *
      * @throws Exception
      */
     public function __call($method, $params)
