@@ -1,6 +1,7 @@
 .DS_STORE
 .idea
 .phpunit.result.cache
+.php-cs-fixer.cache
 composer.lock
 coverage.xml
 /vendor
