@@ -4,6 +4,21 @@ namespace Subbe\WaveApp\GraphQL;
 
 class QueryObject
 {
+    public static function OAuthApplication()
+    {
+        return <<<GQL
+id
+name
+description
+clientId
+logoUrl
+extraData
+createdAt
+modifiedAt
+GQL;
+
+    }
+
     public static function user()
     {
         return <<<GQL
