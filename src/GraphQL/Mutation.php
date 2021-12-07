@@ -11,7 +11,9 @@ class Mutation
         return <<<GQL
 mutation CustomerCreateInput(\$input: CustomerCreateInput!) { 
     customerCreate(input: \$input) { 
-        customer $customer
+        customer {
+            $customer
+        }
         didSucceed 
         inputErrors { 
             path 
@@ -30,7 +32,9 @@ GQL;
         return <<<GQL
 mutation CustomerPatchInput(\$input: CustomerPatchInput!) { 
     customerPatch(input: \$input) { 
-        customer $customer
+        customer {
+            $customer
+        }
         didSucceed 
         inputErrors { 
             message 
@@ -65,7 +69,9 @@ GQL;
         return <<<GQL
 mutation AccountCreateInput(\$input: AccountCreateInput!) { 
     accountCreate(input: \$input) { 
-        account $account 
+        account {
+            $account
+        } 
         didSucceed 
         inputErrors { 
             path 
@@ -84,7 +90,9 @@ GQL;
         return <<<GQL
 mutation AccountPatchInput(\$input: AccountPatchInput!) { 
     accountPatch(input: \$input) { 
-        account $account 
+        account {
+            $account
+        } 
         didSucceed 
         inputErrors { 
             path 
@@ -170,7 +178,9 @@ GQL;
         return <<<GQL
 mutation SalesTaxCreateInput(\$input: SalesTaxCreateInput!) { 
     salesTaxCreate(input: \$input) { 
-        salesTax $salesTax
+        salesTax {
+            $salesTax
+        }
         didSucceed 
         inputErrors { 
             path 
@@ -189,7 +199,9 @@ GQL;
         return <<<GQL
 mutation SalesTaxPatchInput(\$input: SalesTaxPatchInput!) { 
     salesTaxPatch(input: \$input) { 
-        salesTax $salesTax 
+        salesTax {
+            $salesTax
+        } 
         didSucceed 
         inputErrors { 
             path 
@@ -208,7 +220,9 @@ GQL;
         return <<<GQL
 mutation SalesTaxArchiveInput(\$input: SalesTaxArchiveInput!) { 
     salesTaxArchive(input: \$input) { 
-        salesTax $salesTax
+        salesTax {
+            $salesTax
+        }
         didSucceed 
         inputErrors { 
             path 

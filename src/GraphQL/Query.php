@@ -4,14 +4,40 @@ namespace Subbe\WaveApp\GraphQL;
 
 class Query
 {
-    public static function user()
+    public static function OAuthApplication()
     {
-        $user = QueryObject::user();
+        $oauthApp = QueryObject::OAuthApplication();
 
         return <<<GQL
 query {
-    user {
-        $user
+    oAuthApplication {
+        $oauthApp
+    }
+}
+GQL;
+    }
+
+    public static function currencies()
+    {
+        $currency = QueryObject::currency();
+
+        return <<<GQL
+query { 
+    currencies {
+        $currency
+    }
+}
+GQL;
+    }
+
+    public static function currency()
+    {
+        $currency = QueryObject::currency();
+
+        return <<<GQL
+query(\$code: CurrencyCode!) { 
+    currency(code: \$code) {
+        $currency
     }
 }
 GQL;
@@ -38,6 +64,19 @@ GQL;
 query(\$code: CountryCode!) {
     country(code: \$code) {
         $country
+    }
+}
+GQL;
+    }
+
+    public static function province()
+    {
+        $province = QueryObject::province();
+
+        return <<<GQL
+query(\$code: String!) {
+    province(code: \$code) {
+        $province
     }
 }
 GQL;
@@ -78,27 +117,14 @@ query(\$id: ID!) {
 GQL;
     }
 
-    public static function currencies()
+    public static function user()
     {
-        $currency = QueryObject::currency();
+        $user = QueryObject::user();
 
         return <<<GQL
-query { 
-    currencies {
-        $currency
-    }
-}
-GQL;
-    }
-
-    public static function currency()
-    {
-        $currency = QueryObject::currency();
-
-        return <<<GQL
-query(\$code: CurrencyCode!) { 
-    currency(code: \$code) {
-        $currency
+query {
+    user {
+        $user
     }
 }
 GQL;
@@ -130,21 +156,6 @@ query {
 GQL;
     }
 
-    public static function customerExists()
-    {
-        $customer = QueryObject::customer();
-
-        return <<<GQL
-query(\$businessId: ID!, \$customerId: ID!) { 
-    business(id: \$businessId) {
-        customer(id: \$customerId) {
-            $customer
-        } 
-    } 
-}
-GQL;
-    }
-
     public static function customers()
     {
         $customers = QueryObject::customer();
@@ -170,6 +181,21 @@ query(\$businessId: ID!, \$page: Int = 1, \$pageSize: Int = 10) {
 GQL;
     }
 
+    public static function customerExists()
+    {
+        $customer = QueryObject::customer();
+
+        return <<<GQL
+query(\$businessId: ID!, \$customerId: ID!) { 
+    business(id: \$businessId) {
+        customer(id: \$customerId) {
+            $customer
+        } 
+    } 
+}
+GQL;
+    }
+
     public static function products()
     {
         $product = QueryObject::product();
@@ -179,7 +205,9 @@ query (\$businessId: ID!) {
     business(id: \$businessId) {
         products {
             edges {
-                node $product
+                node {
+                    $product
+                }
             }
         }
     }
@@ -196,7 +224,9 @@ query (\$businessId: ID!) {
     business(id: \$businessId) { 
         salesTaxes { 
             edges { 
-                node $salesTax
+                node {
+                    $salesTax
+                }
             } 
         } 
     } 
