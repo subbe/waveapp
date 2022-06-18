@@ -127,7 +127,9 @@ GQL;
         return <<<GQL
 mutation ProductCreateInput(\$input: ProductCreateInput!) { 
     productCreate(input: \$input) { 
-        product $product
+        product {
+            $product
+        }
     } 
 }
 GQL;
@@ -140,7 +142,9 @@ GQL;
         return <<<GQL
 mutation ProductPatchInput(\$input: ProductPatchInput!) { 
     productPatch(input: \$input) { 
-        product $product 
+        product {
+            $product 
+        }
         didSucceed 
         inputErrors { 
             message 
@@ -159,7 +163,9 @@ GQL;
         return <<<GQL
 mutation ProductArchiveInput(\$input: ProductArchiveInput!) { 
     productArchive(input: \$input) { 
-        product $product
+        product {
+            $product
+        }
         didSucceed 
         inputErrors { 
             path 
@@ -257,7 +263,9 @@ GQL;
         return <<<GQL
 mutation MoneyTransactionCreateInput(\$input: MoneyTransactionCreateInput!) { 
     moneyTransactionCreate(input: \$input) { 
-        transaction $transaction
+        transaction {
+            $transaction
+        }
         didSucceed 
         inputErrors { 
             path 
@@ -276,7 +284,9 @@ GQL;
         return <<<GQL
 mutation InvoiceCreateInput(\$input: InvoiceCreateInput!) { 
     invoiceCreate(input: \$input) { 
-        invoice $invoice
+        invoice {
+            $invoice
+        }
         didSucceed 
         inputErrors { 
             path 
@@ -295,7 +305,9 @@ GQL;
         return <<<GQL
 mutation InvoiceCloneInput(\$input: InvoiceCloneInput!) {
     invoiceClone(input: \$input) {
-        invoice $invoice
+        invoice {
+            $invoice
+        }
         didSucceed
         inputErrors {
             path 
@@ -346,7 +358,9 @@ GQL;
         return <<<GQL
 mutation InvoiceApproveInput(\$input: InvoiceApproveInput!) { 
     invoiceApprove(input: \$input) { 
-        invoice $invoice 
+        invoice {
+            $invoice 
+        }
         didSucceed 
         inputErrors { 
             path 
@@ -365,7 +379,9 @@ GQL;
         return <<<GQL
 mutation InvoiceMarkSentInput(\$input: InvoiceMarkSentInput!) { 
     invoiceMarkSent(input: \$input) { 
-        invoice $invoice
+        invoice {
+            $invoice
+        }
         didSucceed 
         inputErrors { 
             path 
