@@ -15,10 +15,10 @@ class WaveAppServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->app->bind('wave-app', function () {
+        $this->app->bind('waveapp', function () {
             return new WaveApp();
         });
 
-        $this->mergeConfigFrom(__DIR__.'/../config/waveapp.php', 'wave-app');
+        $this->mergeConfigFrom(__DIR__.'/../config/waveapp.php', 'waveapp');
     }
 }
