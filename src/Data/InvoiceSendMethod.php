@@ -1,6 +1,6 @@
 <?php
 
-namespace Jeffgreco13\Wave;
+namespace Jeffgreco13\Wave\Data;
 
 class InvoiceSendMethod
 {
