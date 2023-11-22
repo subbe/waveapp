@@ -30,8 +30,6 @@ class Wave
         $this->businessId = ($businessId ? $businessId : config('laravel-wave.business_id'));
 
         $this->client = $client ?: Http::withToken($this->token)->asJson();
-
-        $this->responseBuilder = new ResponseBuilder();
     }
 
     /**
@@ -64,12 +62,31 @@ class Wave
             'variables' => $variables,
         ];
 
-        try {
-            $response = $this->client->post($this->url, $request);
-            return $this->responseBuilder->success($response);
-        } catch (Exception $e) {
-            return $this->responseBuilder->errors($e);
+        $response = $this->client->post($this->url, $request);
+        if ($response->failed()) {
+            $errors = collect(data_get($response->json(), 'errors', []));
+            $error = $errors->first();
+            $code = data_get($error, 'extensions.code', null);
+            $message = data_get($error, 'message', null);
+            \Log::debug($error);
+            switch ($code) {
+                case 'GRAPHQL_VALIDATION_FAILED':
+                    throw new Exceptions\MalformedQueryException("Malformed GraphQL query: {$message}");
+                    break;
+                case 'NOT_FOUND':
+                    throw new Exceptions\ResourceNotFoundException("Resource not found: {$message}");
+                    break;
+                case 'UNAUTHENTICATED':
+                    throw new Exceptions\AuthenticationException("Authentication failed: {$message}");
+                    break;
+                case 'INTERNAL_SERVER_ERROR':
+                    throw new Exceptions\ExecutionException("Execution error: {$message}");
+                    break;
+                default:
+                    throw new \Exception('Wave GraphQL request failed with an unknown error.');
+            }
         }
+        return $response->json();
     }
 
     public function getBusinessId()
