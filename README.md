@@ -1,32 +1,41 @@
-# WaveApp
+# Laravel Wave
 
-[![StyleCI](https://github.styleci.io/repos/254832967/shield?style=flat&branch=master)](https://github.styleci.io/repos/254832967?branch=master)
-[![Build Status](https://travis-ci.com/subbe/waveapp.svg?branch=master)](https://travis-ci.com/subbe/waveapp)
-[![codecov](https://codecov.io/gh/subbe/waveapp/branch/master/graph/badge.svg)](https://codecov.io/gh/subbe/waveapp)
+A wrapper to use the [Wave][wave-app]'s graphql api in your laravel apps.
 
-A wrapper to use the [WaveApp][wave-app]'s graphql api in your laravel apps.
-
-The original documentation is available at:
+Wave API documentation can be located at:
 
 - [Wave - Developer Portal][wave-documentation-url]
-- [API Reference][wave-api-schema]
+- [API Reference][wave-api-reference]
 
-To use WaveApp, you will need to [register][wave-create-an-app] on the developer portal.
+## Application Setup
 
-## Requirement & Install
+To use Laravel Wave, you will need to [create an app][wave-create-an-app] on the developer portal.
+
+After you have created a new app, click in to edit its settings. Create a new Full Access token and copy this to a save place. You will need this in your .env
+
+OAuth flow is not supported by this package. Consider using the [Socialite Wave Provider][socialite-wave] then pass the Access Token to the Wave class at runtime.
+
+## Installation
 
 Require the package using composer:
 
 ```bash
-composer require subbe/waveapp
+composer require jeffgreco13/laravel-wave
 ```
 
-Update your .env file to include
+Update your .env file to include:
 
 ```
-WAVE_ACCESS_TOKEN=
-WAVE_GRAPHQL_URI=
-WAVE_BUSINESS_ID=
+WAVE_ACCESS_TOKEN= *your full access token*
+WAVE_BUSINESS_ID= *ID for the business you wish to interact with*
+WAVE_GRAPHQL_URI= *defaults to https://gql.waveapps.com/graphql/public*
+```
+
+If you do not know the ID for your business, you can use the following tinker command:
+
+```bash
+php artisan tinker
+> (new \Jeffgreco13\Wave\Wave())->businesses()
 ```
 
 ### Queries
@@ -44,20 +53,6 @@ WAVE_BUSINESS_ID=
 - customers
 - products
 - taxes
-- invoicesByCustomerByStatus
-- getBusiness
-- businessAccounts
-- getBusinessAccount
-- businessCustomers
-- getBusinessCustomer
-- businessInvoices
-- getBusinessInvoices
-- businessSalesTaxes
-- getBusinessSalesTax
-- businessProducts
-- getBusinessProduct
-- businessVendors
-- getBusinessVendor
 
 ### Mutations
 
@@ -92,21 +87,21 @@ WAVE_BUSINESS_ID=
 ### Query
 
 ```php
-$waveapp = new \Subbe\WaveApp\WaveApp();
-$countries = $waveapp->countries();
+$Wave = new \Jeffgreco13\Wave\Wave();
+$countries = $Wave->countries();
 ```
 
 or, with parameters...
 
 ```php
-$waveapp = new \Subbe\WaveApp\WaveApp();
-$country = $waveapp->country(['code' => 'US']);
+$Wave = new \Jeffgreco13\Wave\Wave();
+$country = $Wave->country(['code' => 'US']);
 ```
 
 ### Mutation
 
 ```php
-$waveapp = new \Subbe\WaveApp\WaveApp();
+$Wave = new \Jeffgreco13\Wave\Wave();
 $customer = [
     "input" => [
         "businessId" => "<REPLACE-THIS-WITH-THE-BUSINESS-ID>",
@@ -146,7 +141,7 @@ $customer = [
     ],
 ];
 
-$newCustomer = $waveapp->customerCreate($customer, "CustomerCreateInput");
+$newCustomer = $Wave->customerCreate($customer, "CustomerCreateInput");
 ```
 
 ## Contributing
@@ -161,6 +156,8 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 [wave-documentation-url]: https://developer.waveapps.com/hc/en-us/categories/360001114072
 
-[wave-api-schema]: https://developer.waveapps.com/hc/en-us/articles/360019968212-API-Reference
+[wave-api-reference]: https://developer.waveapps.com/hc/en-us/articles/360019968212-API-Reference
 
-[wave-create-an-app]: https://developer.waveapps.com/hc/en-us/sections/360003012132-Create-an-App
+[wave-create-an-app]: https://developer.waveapps.com/hc/en-us/articles/360019762711
+
+[socialite-wave]: https://github.com/SocialiteProviders/Providers/tree/master/src/Wave

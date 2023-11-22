@@ -1,6 +1,6 @@
 <?php
 
-namespace Subbe\WaveApp\GraphQL;
+namespace Jeffgreco13\Wave\GraphQL;
 
 class QueryObject
 {
@@ -107,32 +107,32 @@ GQL;
         $address = self::address();
 
         return <<<GQL
-id 
-name 
-isPersonal 
-organizationalType 
+id
+name
+isPersonal
+organizationalType
 type {
     $businessType
 }
 subtype {
     $businessSubType
-} 
-currency { 
-    $currency 
 }
-timezone 
+currency {
+    $currency
+}
+timezone
 address {
     $address
-} 
-phone 
-fax 
-mobile 
-tollFree 
-website 
-isClassicAccounting 
-isClassicInvoicing 
-isArchived 
-createdAt 
+}
+phone
+fax
+mobile
+tollFree
+website
+isClassicAccounting
+isClassicInvoicing
+isArchived
+createdAt
 modifiedAt
 GQL;
     }
@@ -156,11 +156,11 @@ GQL;
     public static function currency()
     {
         return <<<GQL
-code 
-symbol 
-name 
-plural 
-exponent 
+code
+symbol
+name
+plural
+exponent
 GQL;
     }
 
@@ -170,24 +170,24 @@ GQL;
         $country = self::country();
 
         return <<<GQL
-addressLine1 
-addressLine2 
-city 
+addressLine1
+addressLine2
+city
 province {
     $province
 }
 country {
     $country
-} 
-postalCode 
+}
+postalCode
 GQL;
     }
 
     public static function province()
     {
         return <<<GQL
-code 
-name 
+code
+name
 GQL;
     }
 
@@ -338,9 +338,9 @@ GQL;
     public static function accountType()
     {
         return <<<GQL
-name 
-normalBalanceType 
-value 
+name
+normalBalanceType
+value
 GQL;
     }
 
@@ -349,11 +349,11 @@ GQL;
         $accountType = self::accountType();
 
         return <<<GQL
-name 
-value 
+name
+value
 type {
     $accountType
-} 
+}
 GQL;
     }
 
@@ -411,13 +411,13 @@ GQL;
     public static function product()
     {
         return <<<GQL
-id 
-name 
-description 
-unitPrice 
-isSold 
-isBought 
-isArchived 
+id
+name
+description
+unitPrice
+isSold
+isBought
+isArchived
 createdAt
 modifiedAt
 GQL;

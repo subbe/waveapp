@@ -1,8 +1,8 @@
 <?php
 
-namespace Subbe\WaveApp;
+namespace Jeffgreco13\Wave;
 
-class CustomerSort
+class ProductSort
 {
     const CREATED_AT_ASC = 'CREATED_AT_ASC';
     const CREATED_AT_DESC = 'CREATED_AT_DESC';

@@ -5,27 +5,27 @@ use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
-use Subbe\WaveApp\WaveApp;
+use Jeffgreco13\Wave\Wave;
 
-class WaveAppTest extends TestCase
+class WaveTest extends TestCase
 {
-    const WAVEAPP_URI = 'https://gql.waveapps.com/graphql/public';
-    const WAVEAPP_TOKEN = 'waveapdummyaccesstoken';
-    const WAVEAPP_BUSINESS_ID = 'dummybusinessid';
+    const Wave_URI = 'https://gql.Waves.com/graphql/public';
+    const Wave_TOKEN = 'waveapdummyaccesstoken';
+    const Wave_BUSINESS_ID = 'dummybusinessid';
 
     /** @test */
     public function it_returns_logged_in_user()
     {
         $mock = new MockHandler([
             new Response(200, [],
-                '{"data":{"user":{"id":"unique_user_id","defaultEmail":"johndoe@waveapp.dev","firstName":"John","lastName":"Doe","createdAt":"2020-01-01T00:00:00.000Z","modifiedAt":"2020-01-01T00:00:00.000Z"}}}'
+                '{"data":{"user":{"id":"unique_user_id","defaultEmail":"johndoe@Wave.dev","firstName":"John","lastName":"Doe","createdAt":"2020-01-01T00:00:00.000Z","modifiedAt":"2020-01-01T00:00:00.000Z"}}}'
             ),
         ]);
         $handlerStack = HandlerStack::create($mock);
         $client = new Client(['handler' => $handlerStack]);
 
-        $waveAppClient = new WaveApp($client, self::WAVEAPP_URI, self::WAVEAPP_TOKEN, self::WAVEAPP_BUSINESS_ID);
-        $user = $waveAppClient->user();
+        $WaveClient = new Wave($client, self::Wave_URI, self::Wave_TOKEN, self::Wave_BUSINESS_ID);
+        $user = $WaveClient->user();
 
         $this->assertEquals('unique_user_id', $user['data']['user']['id']);
     }
@@ -41,8 +41,8 @@ class WaveAppTest extends TestCase
         $handlerStack = HandlerStack::create($mock);
         $client = new Client(['handler' => $handlerStack]);
 
-        $waveAppClient = new WaveApp($client, self::WAVEAPP_URI, self::WAVEAPP_TOKEN, self::WAVEAPP_BUSINESS_ID);
-        $countries = $waveAppClient->countries();
+        $WaveClient = new Wave($client, self::Wave_URI, self::Wave_TOKEN, self::Wave_BUSINESS_ID);
+        $countries = $WaveClient->countries();
 
         $oneCountry = json_decode('{"code":"AX","name":"Åland Islands","currency":{"code":"EUR","symbol":"€","name":"Euro","plural":"Euros","exponent":2},"nameWithArticle":"Åland Islands","provinces":[]}',
             1);
@@ -60,8 +60,8 @@ class WaveAppTest extends TestCase
         $handlerStack = HandlerStack::create($mock);
         $client = new Client(['handler' => $handlerStack]);
 
-        $waveAppClient = new WaveApp($client, self::WAVEAPP_URI, self::WAVEAPP_TOKEN, self::WAVEAPP_BUSINESS_ID);
-        $country = $waveAppClient->country(['code' => 'MV']);
+        $WaveClient = new Wave($client, self::Wave_URI, self::Wave_TOKEN, self::Wave_BUSINESS_ID);
+        $country = $WaveClient->country(['code' => 'MV']);
 
         $oneCountry = json_decode('{"code":"AX","name":"Åland Islands","currency":{"code":"EUR","symbol":"€","name":"Euro","plural":"Euros","exponent":2},"nameWithArticle":"Åland Islands","provinces":[]}',
             1);
@@ -79,8 +79,8 @@ class WaveAppTest extends TestCase
         $handlerStack = HandlerStack::create($mock);
         $client = new Client(['handler' => $handlerStack]);
 
-        $waveAppClient = new WaveApp($client, self::WAVEAPP_URI, self::WAVEAPP_TOKEN, self::WAVEAPP_BUSINESS_ID);
-        $businesses = $waveAppClient->businesses();
+        $WaveClient = new Wave($client, self::Wave_URI, self::Wave_TOKEN, self::Wave_BUSINESS_ID);
+        $businesses = $WaveClient->businesses();
 
         $oneBusiness = json_decode('{"node":{"id":"unique_business_id_2","name":"business two","isPersonal":false,"organizationalType":"SOLE_PROPRIETORSHIP","type":{},"subtype":{},"currency":{},"timezone":"","address":{},"phone":null,"fax":null,"mobile":null,"tollFree":null,"website":null,"isClassicAccounting":false,"isClassicInvoicing":false,"isArchived":false,"createdAt":"2020-01-01T00:00:00.000Z","modifiedAt":"2020-01-01T00:00:00.000Z"}}',
             1);
@@ -98,8 +98,8 @@ class WaveAppTest extends TestCase
         $handlerStack = HandlerStack::create($mock);
         $client = new Client(['handler' => $handlerStack]);
 
-        $waveAppClient = new WaveApp($client, self::WAVEAPP_URI, self::WAVEAPP_TOKEN, self::WAVEAPP_BUSINESS_ID);
-        $business = $waveAppClient->business(['id' => 'unique_business_id_2']);
+        $WaveClient = new Wave($client, self::Wave_URI, self::Wave_TOKEN, self::Wave_BUSINESS_ID);
+        $business = $WaveClient->business(['id' => 'unique_business_id_2']);
 
         $oneBusiness = json_decode('{"id":"unique_business_id_2","name":"business two","isPersonal":false,"organizationalType":"SOLE_PROPRIETORSHIP","type":{},"subtype":{},"currency":{},"timezone":"","address":{},"phone":null,"fax":null,"mobile":null,"tollFree":null,"website":null,"isClassicAccounting":false,"isClassicInvoicing":false,"isArchived":false,"createdAt":"2020-01-01T00:00:00.000Z","modifiedAt":"2020-01-01T00:00:00.000Z"}',
             1);
@@ -117,8 +117,8 @@ class WaveAppTest extends TestCase
         $handlerStack = HandlerStack::create($mock);
         $client = new Client(['handler' => $handlerStack]);
 
-        $waveAppClient = new WaveApp($client, self::WAVEAPP_URI, self::WAVEAPP_TOKEN, self::WAVEAPP_BUSINESS_ID);
-        $currencies = $waveAppClient->currencies();
+        $WaveClient = new Wave($client, self::Wave_URI, self::Wave_TOKEN, self::Wave_BUSINESS_ID);
+        $currencies = $WaveClient->currencies();
 
         $this->assertCount(4, $currencies['data']['currencies']);
     }
@@ -134,8 +134,8 @@ class WaveAppTest extends TestCase
         $handlerStack = HandlerStack::create($mock);
         $client = new Client(['handler' => $handlerStack]);
 
-        $waveAppClient = new WaveApp($client, self::WAVEAPP_URI, self::WAVEAPP_TOKEN, self::WAVEAPP_BUSINESS_ID);
-        $currency = $waveAppClient->currency(['code' => 'USD']);
+        $WaveClient = new Wave($client, self::Wave_URI, self::Wave_TOKEN, self::Wave_BUSINESS_ID);
+        $currency = $WaveClient->currency(['code' => 'USD']);
 
         $oneCurrency = json_decode('{"code":"USD","symbol":"$","name":"United States dollar","plural":"United States dollars","exponent":2}', 1);
         $this->assertContains($oneCurrency, $currency['data']);
@@ -152,8 +152,8 @@ class WaveAppTest extends TestCase
         $handlerStack = HandlerStack::create($mock);
         $client = new Client(['handler' => $handlerStack]);
 
-        $waveAppClient = new WaveApp($client, self::WAVEAPP_URI, self::WAVEAPP_TOKEN, self::WAVEAPP_BUSINESS_ID);
-        $acountTypes = $waveAppClient->accountTypes();
+        $WaveClient = new Wave($client, self::Wave_URI, self::Wave_TOKEN, self::Wave_BUSINESS_ID);
+        $acountTypes = $WaveClient->accountTypes();
         $this->assertCount(5, $acountTypes['data']['accountTypes']);
     }
 
@@ -168,8 +168,8 @@ class WaveAppTest extends TestCase
         $handlerStack = HandlerStack::create($mock);
         $client = new Client(['handler' => $handlerStack]);
 
-        $waveAppClient = new WaveApp($client, self::WAVEAPP_URI, self::WAVEAPP_TOKEN, self::WAVEAPP_BUSINESS_ID);
-        $acountSubtypes = $waveAppClient->accountSubTypes();
+        $WaveClient = new Wave($client, self::Wave_URI, self::Wave_TOKEN, self::Wave_BUSINESS_ID);
+        $acountSubtypes = $WaveClient->accountSubTypes();
         $this->assertCount(10, $acountSubtypes['data']['accountSubtypes']);
     }
 
@@ -184,8 +184,8 @@ class WaveAppTest extends TestCase
         $handlerStack = HandlerStack::create($mock);
         $client = new Client(['handler' => $handlerStack]);
 
-        $waveAppClient = new WaveApp($client, self::WAVEAPP_URI, self::WAVEAPP_TOKEN, self::WAVEAPP_BUSINESS_ID);
-        $customerExist = $waveAppClient->customerExists(['businessId' => 'unique_business_id_1', 'customerId' => 'unique_customer_id_1']);
+        $WaveClient = new Wave($client, self::Wave_URI, self::Wave_TOKEN, self::Wave_BUSINESS_ID);
+        $customerExist = $WaveClient->customerExists(['businessId' => 'unique_business_id_1', 'customerId' => 'unique_customer_id_1']);
         $this->assertEquals('unique_business_id_1', $customerExist['data']['business']['customer']['business']['id']);
         $this->assertEquals('unique_customer_id_1', $customerExist['data']['business']['customer']['id']);
     }
@@ -201,8 +201,8 @@ class WaveAppTest extends TestCase
         $handlerStack = HandlerStack::create($mock);
         $client = new Client(['handler' => $handlerStack]);
 
-        $waveAppClient = new WaveApp($client, self::WAVEAPP_URI, self::WAVEAPP_TOKEN, self::WAVEAPP_BUSINESS_ID);
-        $customers = $waveAppClient->customers(['businessId' => 'unique_business_id_1', 'page' => 1, 'pageSize' => 10]);
+        $WaveClient = new Wave($client, self::Wave_URI, self::Wave_TOKEN, self::Wave_BUSINESS_ID);
+        $customers = $WaveClient->customers(['businessId' => 'unique_business_id_1', 'page' => 1, 'pageSize' => 10]);
 
         $this->assertEquals(1, $customers['data']['business']['customers']['pageInfo']['totalCount']);
         $this->assertEquals('unique_business_id_1', $customers['data']['business']['id']);
@@ -220,8 +220,8 @@ class WaveAppTest extends TestCase
         $handlerStack = HandlerStack::create($mock);
         $client = new Client(['handler' => $handlerStack]);
 
-        $waveAppClient = new WaveApp($client, self::WAVEAPP_URI, self::WAVEAPP_TOKEN, self::WAVEAPP_BUSINESS_ID);
-        $products = $waveAppClient->products(['businessId' => 'unique_business_id_1']);
+        $WaveClient = new Wave($client, self::Wave_URI, self::Wave_TOKEN, self::Wave_BUSINESS_ID);
+        $products = $WaveClient->products(['businessId' => 'unique_business_id_1']);
 
         $this->assertEquals('unique_product_id_1', $products['data']['business']['products']['edges'][0]['node']['id']);
     }
@@ -237,8 +237,8 @@ class WaveAppTest extends TestCase
         $handlerStack = HandlerStack::create($mock);
         $client = new Client(['handler' => $handlerStack]);
 
-        $waveAppClient = new WaveApp($client, self::WAVEAPP_URI, self::WAVEAPP_TOKEN, self::WAVEAPP_BUSINESS_ID);
-        $taxes = $waveAppClient->taxes(['businessId' => 'unique_business_id_1']);
+        $WaveClient = new Wave($client, self::Wave_URI, self::Wave_TOKEN, self::Wave_BUSINESS_ID);
+        $taxes = $WaveClient->taxes(['businessId' => 'unique_business_id_1']);
 
         $this->assertEquals('unique_business_id_1', $taxes['data']['business']['salesTaxes']['edges'][0]['node']['business']['id']);
         $this->assertEquals('unique_tax_id_1', $taxes['data']['business']['salesTaxes']['edges'][0]['node']['id']);
@@ -258,14 +258,14 @@ class WaveAppTest extends TestCase
         $handlerStack = HandlerStack::create($mock);
         $client = new Client(['handler' => $handlerStack]);
 
-        $waveAppClient = new WaveApp($client, self::WAVEAPP_URI, self::WAVEAPP_TOKEN, self::WAVEAPP_BUSINESS_ID);
-        $invalidRequest = $waveAppClient->invoicesByCustomerByStatus([
-            'businessId' => 'invalid_business_id_1', 'customerId' => 'unique_customer_id_1', 'invoiceStatus' => \Subbe\WaveApp\InvoiceStatus::DRAFT,
+        $WaveClient = new Wave($client, self::Wave_URI, self::Wave_TOKEN, self::Wave_BUSINESS_ID);
+        $invalidRequest = $WaveClient->invoicesByCustomerByStatus([
+            'businessId' => 'invalid_business_id_1', 'customerId' => 'unique_customer_id_1', 'invoiceStatus' => \Jeffgreco13\Wave\InvoiceStatus::DRAFT,
         ]);
         $this->assertEquals("Business 'invalid_business_id_1' could not be found.", $invalidRequest['errors'][0]['message']);
 
-        $validRequest = $waveAppClient->invoicesByCustomerByStatus([
-            'businessId' => 'unique_business_id_1', 'customerId' => 'unique_customer_id_1', 'invoiceStatus' => \Subbe\WaveApp\InvoiceStatus::DRAFT,
+        $validRequest = $WaveClient->invoicesByCustomerByStatus([
+            'businessId' => 'unique_business_id_1', 'customerId' => 'unique_customer_id_1', 'invoiceStatus' => \Jeffgreco13\Wave\InvoiceStatus::DRAFT,
         ]);
         $this->assertEquals('unique_business_id_1', $validRequest['data']['business']['id']);
         $this->assertEquals('unique_customer_id_1', $validRequest['data']['business']['customer']['id']);
@@ -282,8 +282,8 @@ class WaveAppTest extends TestCase
         $handlerStack = HandlerStack::create($mock);
         $client = new Client(['handler' => $handlerStack]);
 
-        $waveAppClient = new WaveApp($client, self::WAVEAPP_URI, self::WAVEAPP_TOKEN, self::WAVEAPP_BUSINESS_ID);
-        $businessAccounts = $waveAppClient->businessAccounts(['business_id' => 'unique_business_id_1']);
+        $WaveClient = new Wave($client, self::Wave_URI, self::Wave_TOKEN, self::Wave_BUSINESS_ID);
+        $businessAccounts = $WaveClient->businessAccounts(['business_id' => 'unique_business_id_1']);
         $this->assertEquals('unique_business_id_1', $businessAccounts['data']['business']['id']);
     }
 
@@ -298,8 +298,8 @@ class WaveAppTest extends TestCase
         $handlerStack = HandlerStack::create($mock);
         $client = new Client(['handler' => $handlerStack]);
 
-        $waveAppClient = new WaveApp($client, self::WAVEAPP_URI, self::WAVEAPP_TOKEN, self::WAVEAPP_BUSINESS_ID);
-        $businessAccount = $waveAppClient->getBusinessAccount(['business_id' => 'unique_business_id_1', 'account_id' => 'unique_account_id_1']);
+        $WaveClient = new Wave($client, self::Wave_URI, self::Wave_TOKEN, self::Wave_BUSINESS_ID);
+        $businessAccount = $WaveClient->getBusinessAccount(['business_id' => 'unique_business_id_1', 'account_id' => 'unique_account_id_1']);
         $this->assertEquals('unique_business_id_1', $businessAccount['data']['business']['id']);
         $this->assertEquals('unique_account_id_1', $businessAccount['data']['business']['account']['id']);
     }
@@ -315,8 +315,8 @@ class WaveAppTest extends TestCase
         $handlerStack = HandlerStack::create($mock);
         $client = new Client(['handler' => $handlerStack]);
 
-        $waveAppClient = new WaveApp($client, self::WAVEAPP_URI, self::WAVEAPP_TOKEN, self::WAVEAPP_BUSINESS_ID);
-        $businessCustomers = $waveAppClient->businessCustomers(['business_id' => 'unique_business_id_1']);
+        $WaveClient = new Wave($client, self::Wave_URI, self::Wave_TOKEN, self::Wave_BUSINESS_ID);
+        $businessCustomers = $WaveClient->businessCustomers(['business_id' => 'unique_business_id_1']);
         $this->assertEquals('unique_business_id_1', $businessCustomers['data']['business']['id']);
         $this->assertEquals('unique_customer_id_1', $businessCustomers['data']['business']['customers']['edges'][0]['node']['id']);
     }
@@ -332,8 +332,8 @@ class WaveAppTest extends TestCase
         $handlerStack = HandlerStack::create($mock);
         $client = new Client(['handler' => $handlerStack]);
 
-        $waveAppClient = new WaveApp($client, self::WAVEAPP_URI, self::WAVEAPP_TOKEN, self::WAVEAPP_BUSINESS_ID);
-        $businessCustomer = $waveAppClient->getBusinessCustomer(['business_id' => 'unique_business_id_1', 'customer_id' => 'unique_customer_id_1']);
+        $WaveClient = new Wave($client, self::Wave_URI, self::Wave_TOKEN, self::Wave_BUSINESS_ID);
+        $businessCustomer = $WaveClient->getBusinessCustomer(['business_id' => 'unique_business_id_1', 'customer_id' => 'unique_customer_id_1']);
         $this->assertEquals('unique_business_id_1', $businessCustomer['data']['business']['id']);
         $this->assertEquals('unique_customer_id_1', $businessCustomer['data']['business']['customer']['id']);
     }
@@ -349,8 +349,8 @@ class WaveAppTest extends TestCase
         $handlerStack = HandlerStack::create($mock);
         $client = new Client(['handler' => $handlerStack]);
 
-        $waveAppClient = new WaveApp($client, self::WAVEAPP_URI, self::WAVEAPP_TOKEN, self::WAVEAPP_BUSINESS_ID);
-        $businessInvoices = $waveAppClient->businessInvoices(['business_id' => 'unique_business_id_1']);
+        $WaveClient = new Wave($client, self::Wave_URI, self::Wave_TOKEN, self::Wave_BUSINESS_ID);
+        $businessInvoices = $WaveClient->businessInvoices(['business_id' => 'unique_business_id_1']);
         $this->assertEquals('unique_business_id_1', $businessInvoices['data']['business']['id']);
         $this->assertEquals('unique_invoice_id_1', $businessInvoices['data']['business']['invoices']['edges'][0]['node']['id']);
         $this->assertEquals('TEST000001', $businessInvoices['data']['business']['invoices']['edges'][0]['node']['invoiceNumber']);
@@ -367,8 +367,8 @@ class WaveAppTest extends TestCase
         $handlerStack = HandlerStack::create($mock);
         $client = new Client(['handler' => $handlerStack]);
 
-        $waveAppClient = new WaveApp($client, self::WAVEAPP_URI, self::WAVEAPP_TOKEN, self::WAVEAPP_BUSINESS_ID);
-        $businessInvoice = $waveAppClient->getBusinessInvoices(['business_id' => 'unique_business_id_1', 'invoice_id' => 'unique_invoice_id_1']);
+        $WaveClient = new Wave($client, self::Wave_URI, self::Wave_TOKEN, self::Wave_BUSINESS_ID);
+        $businessInvoice = $WaveClient->getBusinessInvoices(['business_id' => 'unique_business_id_1', 'invoice_id' => 'unique_invoice_id_1']);
         $this->assertEquals('unique_business_id_1', $businessInvoice['data']['business']['id']);
         $this->assertEquals('unique_invoice_id_1', $businessInvoice['data']['business']['invoice']['id']);
     }
@@ -384,8 +384,8 @@ class WaveAppTest extends TestCase
         $handlerStack = HandlerStack::create($mock);
         $client = new Client(['handler' => $handlerStack]);
 
-        $waveAppClient = new WaveApp($client, self::WAVEAPP_URI, self::WAVEAPP_TOKEN, self::WAVEAPP_BUSINESS_ID);
-        $businessTaxes = $waveAppClient->businessSalesTaxes(['business_id' => 'unique_business_id_1']);
+        $WaveClient = new Wave($client, self::Wave_URI, self::Wave_TOKEN, self::Wave_BUSINESS_ID);
+        $businessTaxes = $WaveClient->businessSalesTaxes(['business_id' => 'unique_business_id_1']);
         $this->assertEquals('unique_business_id_1', $businessTaxes['data']['business']['id']);
         $this->assertEquals('unique_sales_tax_1', $businessTaxes['data']['business']['salesTaxes']['edges'][0]['node']['id']);
     }
@@ -401,8 +401,8 @@ class WaveAppTest extends TestCase
         $handlerStack = HandlerStack::create($mock);
         $client = new Client(['handler' => $handlerStack]);
 
-        $waveAppClient = new WaveApp($client, self::WAVEAPP_URI, self::WAVEAPP_TOKEN, self::WAVEAPP_BUSINESS_ID);
-        $businessTax = $waveAppClient->getBusinessSalesTax(['business_id' => 'unique_business_id_1', 'tax_id' => 'unique_tax_id_1']);
+        $WaveClient = new Wave($client, self::Wave_URI, self::Wave_TOKEN, self::Wave_BUSINESS_ID);
+        $businessTax = $WaveClient->getBusinessSalesTax(['business_id' => 'unique_business_id_1', 'tax_id' => 'unique_tax_id_1']);
         $this->assertEquals('unique_business_id_1', $businessTax['data']['business']['id']);
         $this->assertEquals('unique_tax_id_1', $businessTax['data']['business']['salesTax']['id']);
     }
@@ -418,8 +418,8 @@ class WaveAppTest extends TestCase
         $handlerStack = HandlerStack::create($mock);
         $client = new Client(['handler' => $handlerStack]);
 
-        $waveAppClient = new WaveApp($client, self::WAVEAPP_URI, self::WAVEAPP_TOKEN, self::WAVEAPP_BUSINESS_ID);
-        $businessProducts = $waveAppClient->businessProducts(['business_id' => 'unique_business_id_1']);
+        $WaveClient = new Wave($client, self::Wave_URI, self::Wave_TOKEN, self::Wave_BUSINESS_ID);
+        $businessProducts = $WaveClient->businessProducts(['business_id' => 'unique_business_id_1']);
         $this->assertEquals('unique_business_id_1', $businessProducts['data']['business']['id']);
         $this->assertEquals('unique_product_id_1', $businessProducts['data']['business']['products']['edges'][0]['node']['id']);
     }
@@ -435,8 +435,8 @@ class WaveAppTest extends TestCase
         $handlerStack = HandlerStack::create($mock);
         $client = new Client(['handler' => $handlerStack]);
 
-        $waveAppClient = new WaveApp($client, self::WAVEAPP_URI, self::WAVEAPP_TOKEN, self::WAVEAPP_BUSINESS_ID);
-        $businessProduct = $waveAppClient->getBusinessProduct(['business_id' => 'unique_business_id_1', 'product_id' => 'unique_product_id_1']);
+        $WaveClient = new Wave($client, self::Wave_URI, self::Wave_TOKEN, self::Wave_BUSINESS_ID);
+        $businessProduct = $WaveClient->getBusinessProduct(['business_id' => 'unique_business_id_1', 'product_id' => 'unique_product_id_1']);
         $this->assertEquals('unique_business_id_1', $businessProduct['data']['business']['id']);
         $this->assertEquals('unique_product_id_1', $businessProduct['data']['business']['product']['id']);
     }
@@ -452,8 +452,8 @@ class WaveAppTest extends TestCase
         $handlerStack = HandlerStack::create($mock);
         $client = new Client(['handler' => $handlerStack]);
 
-        $waveAppClient = new WaveApp($client, self::WAVEAPP_URI, self::WAVEAPP_TOKEN, self::WAVEAPP_BUSINESS_ID);
-        $businessVendors = $waveAppClient->businessVendors(['business_id' => 'unique_business_id_1']);
+        $WaveClient = new Wave($client, self::Wave_URI, self::Wave_TOKEN, self::Wave_BUSINESS_ID);
+        $businessVendors = $WaveClient->businessVendors(['business_id' => 'unique_business_id_1']);
         $this->assertEquals('unique_business_id_1', $businessVendors['data']['business']['id']);
         $this->assertEquals('unique_vendor_id_1', $businessVendors['data']['business']['vendors']['edges'][0]['node']['id']);
     }
@@ -469,8 +469,8 @@ class WaveAppTest extends TestCase
         $handlerStack = HandlerStack::create($mock);
         $client = new Client(['handler' => $handlerStack]);
 
-        $waveAppClient = new WaveApp($client, self::WAVEAPP_URI, self::WAVEAPP_TOKEN, self::WAVEAPP_BUSINESS_ID);
-        $businessVendor = $waveAppClient->getBusinessVendor(['business_id' => 'unique_business_id_1', 'vendor_id' => 'unique_vendor_id_1']);
+        $WaveClient = new Wave($client, self::Wave_URI, self::Wave_TOKEN, self::Wave_BUSINESS_ID);
+        $businessVendor = $WaveClient->getBusinessVendor(['business_id' => 'unique_business_id_1', 'vendor_id' => 'unique_vendor_id_1']);
         $this->assertEquals('unique_business_id_1', $businessVendor['data']['business']['id']);
         $this->assertEquals('unique_vendor_id_1', $businessVendor['data']['business']['vendor']['id']);
     }
@@ -486,8 +486,8 @@ class WaveAppTest extends TestCase
         $handlerStack = HandlerStack::create($mock);
         $client = new Client(['handler' => $handlerStack]);
 
-        $waveAppClient = new WaveApp($client, self::WAVEAPP_URI, self::WAVEAPP_TOKEN, self::WAVEAPP_BUSINESS_ID);
-        $business = $waveAppClient->getBusiness(['business_id' => 'unique_business_id']);
+        $WaveClient = new Wave($client, self::Wave_URI, self::Wave_TOKEN, self::Wave_BUSINESS_ID);
+        $business = $WaveClient->getBusiness(['business_id' => 'unique_business_id']);
         $this->assertEquals('unique_business_id_1', $business['data']['business']['id']);
         $this->assertEquals('unique_account_id_1', $business['data']['business']['accounts']['edges'][0]['node']['id']);
         $this->assertEquals('unique_customer_id_1', $business['data']['business']['customers']['edges'][0]['node']['id']);

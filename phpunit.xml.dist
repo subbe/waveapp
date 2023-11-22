@@ -22,7 +22,7 @@
         </report>
     </coverage>
     <testsuites>
-        <testsuite name="WaveApp Test Suite">
+        <testsuite name="Wave Test Suite">
             <directory>tests</directory>
         </testsuite>
     </testsuites>

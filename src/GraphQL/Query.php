@@ -1,6 +1,6 @@
 <?php
 
-namespace Subbe\WaveApp\GraphQL;
+namespace Jeffgreco13\Wave\GraphQL;
 
 class Query
 {
@@ -22,7 +22,7 @@ GQL;
         $currency = QueryObject::currency();
 
         return <<<GQL
-query { 
+query {
     currencies {
         $currency
     }
@@ -35,7 +35,7 @@ GQL;
         $currency = QueryObject::currency();
 
         return <<<GQL
-query(\$code: CurrencyCode!) { 
+query(\$code: CurrencyCode!) {
     currency(code: \$code) {
         $currency
     }
@@ -88,18 +88,18 @@ GQL;
 
         return <<<GQL
 query(\$page: Int = 1, \$pageSize: Int = 10) {
-    businesses(page: \$page, pageSize: \$pageSize) { 
-        pageInfo { 
-            currentPage 
-            totalPages 
-            totalCount 
+    businesses(page: \$page, pageSize: \$pageSize) {
+        pageInfo {
+            currentPage
+            totalPages
+            totalCount
         }
-        edges { 
+        edges {
             node {
                 $business
             }
         }
-    } 
+    }
 }
 GQL;
     }
@@ -109,8 +109,8 @@ GQL;
         $business = QueryObject::business();
 
         return <<<GQL
-query(\$id: ID!) { 
-    business(id: \$id) {
+query(\$businessId: ID!) {
+    business(id: \$businessId) {
         $business
     }
 }
@@ -135,10 +135,10 @@ GQL;
         $accountType = QueryObject::accountType();
 
         return <<<GQL
-query { 
+query {
     accountTypes {
         $accountType
-    } 
+    }
 }
 GQL;
     }
@@ -148,10 +148,10 @@ GQL;
         $accountSubtype = QueryObject::accountSubtype();
 
         return <<<GQL
-query { 
+query {
     accountSubtypes {
         $accountSubtype
-    } 
+    }
 }
 GQL;
     }
@@ -186,12 +186,12 @@ GQL;
         $customer = QueryObject::customer();
 
         return <<<GQL
-query(\$businessId: ID!, \$customerId: ID!) { 
+query(\$businessId: ID!, \$customerId: ID!) {
     business(id: \$businessId) {
         customer(id: \$customerId) {
             $customer
-        } 
-    } 
+        }
+    }
 }
 GQL;
     }
@@ -220,200 +220,9 @@ GQL;
         $salesTax = QueryObject::salesTax();
 
         return <<<GQL
-query (\$businessId: ID!) { 
-    business(id: \$businessId) { 
-        salesTaxes { 
-            edges { 
-                node {
-                    $salesTax
-                }
-            } 
-        } 
-    } 
-}
-GQL;
-    }
-
-    public static function invoicesByCustomerByStatus()
-    {
-        $business = QueryObject::business();
-        $customer = QueryObject::customer();
-        $invoice = QueryObject::invoice();
-
-        return <<<GQL
-query ListInvoicesByStatus (
-    \$businessId: ID!, 
-    \$customerId: ID!, 
-    \$invoiceStatus: InvoiceStatus!, 
-    \$page: Int = 1, 
-    \$pageSize: Int = 10
-) {
+query (\$businessId: ID!) {
     business(id: \$businessId) {
-        $business
-        customer(id: \$customerId) {
-            $customer
-        }
-        invoices(customerId: \$customerId, status: \$invoiceStatus, page: \$page, pageSize: \$pageSize) {
-            pageInfo {
-                currentPage
-                totalPages
-                totalCount
-            }
-            edges {
-                node {
-                    $invoice
-                }
-            }
-        }
-    }
-}
-GQL;
-    }
-
-    public static function businessAccounts()
-    {
-        $business = QueryObject::business();
-        $account = QueryObject::account();
-
-        return <<<GQL
-query(\$business_id: ID!, \$account_page: Int = 1, \$account_page_size: Int = 10) {
-    business(id: \$business_id) {
-        $business
-        accounts(page: \$account_page, pageSize: \$account_page_size) {
-            pageInfo {
-                currentPage
-                totalPages
-                totalCount
-            }
-            edges {
-                node {
-                    $account
-                }
-            }
-        }
-    } 
-}
-GQL;
-    }
-
-    public static function getBusinessAccount()
-    {
-        $business = QueryObject::business();
-        $account = QueryObject::account();
-
-        return <<<GQL
-query(\$business_id: ID!, \$account_id: ID!) {
-    business(id: \$business_id) {
-        $business
-        account(id: \$account_id) {
-            $account
-        }
-    } 
-}
-GQL;
-    }
-
-    public static function businessCustomers()
-    {
-        $business = QueryObject::business();
-        $customer = QueryObject::customer();
-
-        return <<<GQL
-query(\$business_id: ID!, \$customer_page: Int = 1, \$customer_page_size: Int = 10) {
-    business(id: \$business_id) {
-        $business
-        customers(page: \$customer_page, pageSize: \$customer_page_size) {
-            pageInfo {
-                currentPage
-                totalPages
-                totalCount
-            }
-            edges {
-                node {
-                    $customer
-                }
-            }
-        }
-    } 
-}
-GQL;
-    }
-
-    public static function getBusinessCustomer()
-    {
-        $business = QueryObject::business();
-        $customer = QueryObject::customer();
-
-        return <<<GQL
-query(\$business_id: ID!, \$customer_id: ID!) {
-    business(id: \$business_id) {
-        $business
-        customer(id: \$customer_id) {
-            $customer
-        }
-    }
-}
-GQL;
-    }
-
-    public static function businessInvoices()
-    {
-        $business = QueryObject::business();
-        $invoice = QueryObject::invoice();
-
-        return <<<GQL
-query(\$business_id: ID!, \$invoice_page: Int = 1, \$invoice_page_size: Int = 10) {
-    business(id: \$business_id) {
-        $business
-        invoices(page: \$invoice_page, pageSize: \$invoice_page_size) {
-            pageInfo {
-                currentPage
-                totalPages
-                totalCount
-            }
-            edges {
-                node {
-                    $invoice
-                }
-            }
-        }
-    }
-}
-GQL;
-    }
-
-    public static function getBusinessInvoices()
-    {
-        $business = QueryObject::business();
-        $invoice = QueryObject::invoice();
-
-        return <<<GQL
-query(\$business_id: ID!, \$invoice_id: ID!) {
-    business(id: \$business_id) {
-        $business
-        invoice(id: \$invoice_id) {
-            $invoice
-        }
-    }
-}
-GQL;
-    }
-
-    public static function businessSalesTaxes()
-    {
-        $business = QueryObject::business();
-        $salesTax = QueryObject::salesTax();
-
-        return <<<GQL
-query(\$business_id: ID!, \$tax_page: Int = 1, \$tax_page_size: Int = 10) {
-    business(id: \$business_id) {
-        $business
-        salesTaxes(page: \$tax_page, pageSize: \$tax_page_size) {
-            pageInfo {
-                currentPage
-                totalPages
-                totalCount
-            }
+        salesTaxes {
             edges {
                 node {
                     $salesTax
@@ -425,215 +234,406 @@ query(\$business_id: ID!, \$tax_page: Int = 1, \$tax_page_size: Int = 10) {
 GQL;
     }
 
-    public static function getBusinessSalesTax()
-    {
-        $business = QueryObject::business();
-        $salesTax = QueryObject::salesTax();
+//     public static function invoicesByCustomerByStatus()
+//     {
+//         $business = QueryObject::business();
+//         $customer = QueryObject::customer();
+//         $invoice = QueryObject::invoice();
 
-        return <<<GQL
-query(\$business_id: ID!, \$tax_id: ID!) {
-    business(id: \$business_id) {
-        $business
-        salesTax(id: \$tax_id) {
-            $salesTax
-        }
-    }
-}
-GQL;
-    }
+//         return <<<GQL
+// query ListInvoicesByStatus (
+//     \$businessId: ID!,
+//     \$customerId: ID!,
+//     \$invoiceStatus: InvoiceStatus!,
+//     \$page: Int = 1,
+//     \$pageSize: Int = 10
+// ) {
+//     business(id: \$businessId) {
+//         $business
+//         customer(id: \$customerId) {
+//             $customer
+//         }
+//         invoices(customerId: \$customerId, status: \$invoiceStatus, page: \$page, pageSize: \$pageSize) {
+//             pageInfo {
+//                 currentPage
+//                 totalPages
+//                 totalCount
+//             }
+//             edges {
+//                 node {
+//                     $invoice
+//                 }
+//             }
+//         }
+//     }
+// }
+// GQL;
+//     }
 
-    public static function businessProducts()
-    {
-        $business = QueryObject::business();
-        $product = QueryObject::product();
+//     public static function businessAccounts()
+//     {
+//         $business = QueryObject::business();
+//         $account = QueryObject::account();
 
-        return <<<GQL
-query(\$business_id: ID!, \$product_page: Int = 1, \$product_page_size: Int = 10) {
-    business(id: \$business_id) {
-        $business
-        products(page: \$product_page, pageSize: \$product_page_size) {
-            pageInfo {
-                currentPage
-                totalPages
-                totalCount
-            }
-            edges {
-                node {
-                    $product
-                }
-            }
-        }
-    }
-}
-GQL;
-    }
+//         return <<<GQL
+// query(\$business_id: ID!, \$account_page: Int = 1, \$account_page_size: Int = 10) {
+//     business(id: \$business_id) {
+//         $business
+//         accounts(page: \$account_page, pageSize: \$account_page_size) {
+//             pageInfo {
+//                 currentPage
+//                 totalPages
+//                 totalCount
+//             }
+//             edges {
+//                 node {
+//                     $account
+//                 }
+//             }
+//         }
+//     }
+// }
+// GQL;
+//     }
 
-    public static function getBusinessProduct()
-    {
-        $business = QueryObject::business();
-        $product = QueryObject::product();
+//     public static function getBusinessAccount()
+//     {
+//         $business = QueryObject::business();
+//         $account = QueryObject::account();
 
-        return <<<GQL
-query(\$business_id: ID!, \$product_id: ID!) {
-    business(id: \$business_id) {
-        $business
-        product(id: \$product_id) {
-            $product
-        }
-    }
-}
-GQL;
-    }
+//         return <<<GQL
+// query(\$business_id: ID!, \$account_id: ID!) {
+//     business(id: \$business_id) {
+//         $business
+//         account(id: \$account_id) {
+//             $account
+//         }
+//     }
+// }
+// GQL;
+//     }
 
-    public static function businessVendors()
-    {
-        $business = QueryObject::business();
-        $vendor = QueryObject::vendor();
+//     public static function businessCustomers()
+//     {
+//         $business = QueryObject::business();
+//         $customer = QueryObject::customer();
 
-        return <<<GQL
-query(
-    \$business_id: ID!, 
-    \$vendor_page: Int = 1, 
-    \$vendor_page_size: Int = 10
-) {
-    business(id: \$business_id) {
-        $business
-        vendors(page: \$vendor_page, pageSize: \$vendor_page_size) {
-            pageInfo {
-                currentPage
-                totalPages
-                totalCount
-            }
-            edges {
-                node {
-                    $vendor
-                }
-            }
-        }
-    }
-}
-GQL;
-    }
+//         return <<<GQL
+// query(\$business_id: ID!, \$customer_page: Int = 1, \$customer_page_size: Int = 10) {
+//     business(id: \$business_id) {
+//         $business
+//         customers(page: \$customer_page, pageSize: \$customer_page_size) {
+//             pageInfo {
+//                 currentPage
+//                 totalPages
+//                 totalCount
+//             }
+//             edges {
+//                 node {
+//                     $customer
+//                 }
+//             }
+//         }
+//     }
+// }
+// GQL;
+//     }
 
-    public static function getBusinessVendor()
-    {
-        $business = QueryObject::business();
-        $vendor = QueryObject::vendor();
+//     public static function getBusinessCustomer()
+//     {
+//         $business = QueryObject::business();
+//         $customer = QueryObject::customer();
 
-        return <<<GQL
-query(\$business_id: ID!, \$vendor_id: ID!) {
-    business(id: \$business_id) {
-        $business
-        vendor(id: \$vendor_id) {
-            $vendor
-        }
-    }
-}
-GQL;
-    }
+//         return <<<GQL
+// query(\$business_id: ID!, \$customer_id: ID!) {
+//     business(id: \$business_id) {
+//         $business
+//         customer(id: \$customer_id) {
+//             $customer
+//         }
+//     }
+// }
+// GQL;
+//     }
 
-    public static function getBusiness()
-    {
-        $business = QueryObject::business();
-        $account = QueryObject::account();
-        $customer = QueryObject::customer();
-        $invoice = QueryObject::invoice();
-        $salesTax = QueryObject::salesTax();
-        $product = QueryObject::product();
-        $vendor = QueryObject::vendor();
+//     public static function businessInvoices()
+//     {
+//         $business = QueryObject::business();
+//         $invoice = QueryObject::invoice();
 
-        return <<<GQL
-query(
-    \$business_id: ID!, 
-    \$account_page: Int = 1, 
-    \$account_page_size: Int = 10, 
-    \$customer_page: Int = 1, 
-    \$customer_page_size: Int = 10, 
-    \$invoice_page: Int = 1, 
-    \$invoice_page_size: Int = 10, 
-    \$tax_page: Int = 1, 
-    \$tax_page_size: Int = 10, 
-    \$product_page: Int = 1, 
-    \$product_page_size: Int = 10, 
-    \$vendor_page: Int = 1, 
-    \$vendor_page_size: Int = 10
-) {
-    business(id: \$business_id) {
-        $business
-        accounts(page: \$account_page, pageSize: \$account_page_size) {
-            pageInfo {
-                currentPage
-                totalPages
-                totalCount
-            }
-            edges {
-                node {
-                    $account
-                }
-            }
-        }
-        customers(page: \$customer_page, pageSize: \$customer_page_size) {
-            pageInfo {
-                currentPage
-                totalPages
-                totalCount
-            }
-            edges {
-                node {
-                    $customer
-                }
-            }
-        }
-        invoices(page: \$invoice_page, pageSize: \$invoice_page_size) {
-            pageInfo {
-                currentPage
-                totalPages
-                totalCount
-            }
-            edges {
-                node {
-                    $invoice
-                }
-            }
-        }
-        salesTaxes(page: \$tax_page, pageSize: \$tax_page_size) {
-            pageInfo {
-                currentPage
-                totalPages
-                totalCount
-            }
-            edges {
-                node {
-                    $salesTax
-                }
-            }
-        }
-        products(page: \$product_page, pageSize: \$product_page_size) {
-            pageInfo {
-                currentPage
-                totalPages
-                totalCount
-            }
-            edges {
-                node {
-                    $product
-                }
-            }
-        }
-        vendors(page: \$vendor_page, pageSize: \$vendor_page_size) {
-            pageInfo {
-                currentPage
-                totalPages
-                totalCount
-            }
-            edges {
-                node {
-                    $vendor
-                }
-            }
-        }
-    }
-}
-GQL;
-    }
+//         return <<<GQL
+// query(\$business_id: ID!, \$invoice_page: Int = 1, \$invoice_page_size: Int = 10) {
+//     business(id: \$business_id) {
+//         $business
+//         invoices(page: \$invoice_page, pageSize: \$invoice_page_size) {
+//             pageInfo {
+//                 currentPage
+//                 totalPages
+//                 totalCount
+//             }
+//             edges {
+//                 node {
+//                     $invoice
+//                 }
+//             }
+//         }
+//     }
+// }
+// GQL;
+//     }
+
+//     public static function getBusinessInvoices()
+//     {
+//         $business = QueryObject::business();
+//         $invoice = QueryObject::invoice();
+
+//         return <<<GQL
+// query(\$business_id: ID!, \$invoice_id: ID!) {
+//     business(id: \$business_id) {
+//         $business
+//         invoice(id: \$invoice_id) {
+//             $invoice
+//         }
+//     }
+// }
+// GQL;
+//     }
+
+//     public static function businessSalesTaxes()
+//     {
+//         $business = QueryObject::business();
+//         $salesTax = QueryObject::salesTax();
+
+//         return <<<GQL
+// query(\$business_id: ID!, \$tax_page: Int = 1, \$tax_page_size: Int = 10) {
+//     business(id: \$business_id) {
+//         $business
+//         salesTaxes(page: \$tax_page, pageSize: \$tax_page_size) {
+//             pageInfo {
+//                 currentPage
+//                 totalPages
+//                 totalCount
+//             }
+//             edges {
+//                 node {
+//                     $salesTax
+//                 }
+//             }
+//         }
+//     }
+// }
+// GQL;
+//     }
+
+//     public static function getBusinessSalesTax()
+//     {
+//         $business = QueryObject::business();
+//         $salesTax = QueryObject::salesTax();
+
+//         return <<<GQL
+// query(\$business_id: ID!, \$tax_id: ID!) {
+//     business(id: \$business_id) {
+//         $business
+//         salesTax(id: \$tax_id) {
+//             $salesTax
+//         }
+//     }
+// }
+// GQL;
+//     }
+
+//     public static function businessProducts()
+//     {
+//         $business = QueryObject::business();
+//         $product = QueryObject::product();
+
+//         return <<<GQL
+// query(\$business_id: ID!, \$product_page: Int = 1, \$product_page_size: Int = 10) {
+//     business(id: \$business_id) {
+//         $business
+//         products(page: \$product_page, pageSize: \$product_page_size) {
+//             pageInfo {
+//                 currentPage
+//                 totalPages
+//                 totalCount
+//             }
+//             edges {
+//                 node {
+//                     $product
+//                 }
+//             }
+//         }
+//     }
+// }
+// GQL;
+//     }
+
+//     public static function getBusinessProduct()
+//     {
+//         $business = QueryObject::business();
+//         $product = QueryObject::product();
+
+//         return <<<GQL
+// query(\$business_id: ID!, \$product_id: ID!) {
+//     business(id: \$business_id) {
+//         $business
+//         product(id: \$product_id) {
+//             $product
+//         }
+//     }
+// }
+// GQL;
+//     }
+
+//     public static function businessVendors()
+//     {
+//         $business = QueryObject::business();
+//         $vendor = QueryObject::vendor();
+
+//         return <<<GQL
+// query(
+//     \$business_id: ID!,
+//     \$vendor_page: Int = 1,
+//     \$vendor_page_size: Int = 10
+// ) {
+//     business(id: \$business_id) {
+//         $business
+//         vendors(page: \$vendor_page, pageSize: \$vendor_page_size) {
+//             pageInfo {
+//                 currentPage
+//                 totalPages
+//                 totalCount
+//             }
+//             edges {
+//                 node {
+//                     $vendor
+//                 }
+//             }
+//         }
+//     }
+// }
+// GQL;
+//     }
+
+//     public static function getBusinessVendor()
+//     {
+//         $business = QueryObject::business();
+//         $vendor = QueryObject::vendor();
+
+//         return <<<GQL
+// query(\$business_id: ID!, \$vendor_id: ID!) {
+//     business(id: \$business_id) {
+//         $business
+//         vendor(id: \$vendor_id) {
+//             $vendor
+//         }
+//     }
+// }
+// GQL;
+//     }
+
+//     public static function getBusiness()
+//     {
+//         $business = QueryObject::business();
+//         $account = QueryObject::account();
+//         $customer = QueryObject::customer();
+//         $invoice = QueryObject::invoice();
+//         $salesTax = QueryObject::salesTax();
+//         $product = QueryObject::product();
+//         $vendor = QueryObject::vendor();
+
+//         return <<<GQL
+// query(
+//     \$business_id: ID!,
+//     \$account_page: Int = 1,
+//     \$account_page_size: Int = 10,
+//     \$customer_page: Int = 1,
+//     \$customer_page_size: Int = 10,
+//     \$invoice_page: Int = 1,
+//     \$invoice_page_size: Int = 10,
+//     \$tax_page: Int = 1,
+//     \$tax_page_size: Int = 10,
+//     \$product_page: Int = 1,
+//     \$product_page_size: Int = 10,
+//     \$vendor_page: Int = 1,
+//     \$vendor_page_size: Int = 10
+// ) {
+//     business(id: \$business_id) {
+//         $business
+//         accounts(page: \$account_page, pageSize: \$account_page_size) {
+//             pageInfo {
+//                 currentPage
+//                 totalPages
+//                 totalCount
+//             }
+//             edges {
+//                 node {
+//                     $account
+//                 }
+//             }
+//         }
+//         customers(page: \$customer_page, pageSize: \$customer_page_size) {
+//             pageInfo {
+//                 currentPage
+//                 totalPages
+//                 totalCount
+//             }
+//             edges {
+//                 node {
+//                     $customer
+//                 }
+//             }
+//         }
+//         invoices(page: \$invoice_page, pageSize: \$invoice_page_size) {
+//             pageInfo {
+//                 currentPage
+//                 totalPages
+//                 totalCount
+//             }
+//             edges {
+//                 node {
+//                     $invoice
+//                 }
+//             }
+//         }
+//         salesTaxes(page: \$tax_page, pageSize: \$tax_page_size) {
+//             pageInfo {
+//                 currentPage
+//                 totalPages
+//                 totalCount
+//             }
+//             edges {
+//                 node {
+//                     $salesTax
+//                 }
+//             }
+//         }
+//         products(page: \$product_page, pageSize: \$product_page_size) {
+//             pageInfo {
+//                 currentPage
+//                 totalPages
+//                 totalCount
+//             }
+//             edges {
+//                 node {
+//                     $product
+//                 }
+//             }
+//         }
+//         vendors(page: \$vendor_page, pageSize: \$vendor_page_size) {
+//             pageInfo {
+//                 currentPage
+//                 totalPages
+//                 totalCount
+//             }
+//             edges {
+//                 node {
+//                     $vendor
+//                 }
+//             }
+//         }
+//     }
+// }
+// GQL;
+//     }
 }

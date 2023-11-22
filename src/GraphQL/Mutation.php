@@ -1,6 +1,6 @@
 <?php
 
-namespace Subbe\WaveApp\GraphQL;
+namespace Jeffgreco13\Wave\GraphQL;
 
 class Mutation
 {
@@ -9,18 +9,18 @@ class Mutation
         $customer = QueryObject::customer();
 
         return <<<GQL
-mutation CustomerCreateInput(\$input: CustomerCreateInput!) { 
-    customerCreate(input: \$input) { 
+mutation CustomerCreateInput(\$input: CustomerCreateInput!) {
+    customerCreate(input: \$input) {
         customer {
             $customer
         }
-        didSucceed 
-        inputErrors { 
-            path 
-            message 
-            code 
-        } 
-    } 
+        didSucceed
+        inputErrors {
+            path
+            message
+            code
+        }
+    }
 }
 GQL;
     }
@@ -30,18 +30,18 @@ GQL;
         $customer = QueryObject::customer();
 
         return <<<GQL
-mutation CustomerPatchInput(\$input: CustomerPatchInput!) { 
-    customerPatch(input: \$input) { 
+mutation CustomerPatchInput(\$input: CustomerPatchInput!) {
+    customerPatch(input: \$input) {
         customer {
             $customer
         }
-        didSucceed 
-        inputErrors { 
-            message 
-            path 
-            code 
-        } 
-    } 
+        didSucceed
+        inputErrors {
+            message
+            path
+            code
+        }
+    }
 }
 GQL;
     }
@@ -49,15 +49,15 @@ GQL;
     public static function customerDelete()
     {
         return <<<GQL
-mutation CustomerDeleteInput(\$input: CustomerDeleteInput!) { 
-    customerDelete(input: \$input) { 
-        didSucceed 
-        inputErrors { 
-            message 
-            path 
-            code 
-        } 
-    } 
+mutation CustomerDeleteInput(\$input: CustomerDeleteInput!) {
+    customerDelete(input: \$input) {
+        didSucceed
+        inputErrors {
+            message
+            path
+            code
+        }
+    }
 }
 GQL;
     }
@@ -67,18 +67,18 @@ GQL;
         $account = QueryObject::account();
 
         return <<<GQL
-mutation AccountCreateInput(\$input: AccountCreateInput!) { 
-    accountCreate(input: \$input) { 
+mutation AccountCreateInput(\$input: AccountCreateInput!) {
+    accountCreate(input: \$input) {
         account {
             $account
-        } 
-        didSucceed 
-        inputErrors { 
-            path 
-            message 
-            code 
-        } 
-    } 
+        }
+        didSucceed
+        inputErrors {
+            path
+            message
+            code
+        }
+    }
 }
 GQL;
     }
@@ -88,18 +88,18 @@ GQL;
         $account = QueryObject::account();
 
         return <<<GQL
-mutation AccountPatchInput(\$input: AccountPatchInput!) { 
-    accountPatch(input: \$input) { 
+mutation AccountPatchInput(\$input: AccountPatchInput!) {
+    accountPatch(input: \$input) {
         account {
             $account
-        } 
-        didSucceed 
-        inputErrors { 
-            path 
-            message 
-            code 
-        } 
-    } 
+        }
+        didSucceed
+        inputErrors {
+            path
+            message
+            code
+        }
+    }
 }
 GQL;
     }
@@ -107,15 +107,15 @@ GQL;
     public static function accountArchive()
     {
         return <<<GQL
-mutation AccountArchiveInput(\$input: AccountArchiveInput!) { 
-    accountArchive(input: \$input) { 
-        didSucceed 
-        inputErrors { 
-            path 
-            message 
-            code 
-        } 
-    } 
+mutation AccountArchiveInput(\$input: AccountArchiveInput!) {
+    accountArchive(input: \$input) {
+        didSucceed
+        inputErrors {
+            path
+            message
+            code
+        }
+    }
 }
 GQL;
     }
@@ -125,12 +125,12 @@ GQL;
         $product = QueryObject::product();
 
         return <<<GQL
-mutation ProductCreateInput(\$input: ProductCreateInput!) { 
-    productCreate(input: \$input) { 
+mutation ProductCreateInput(\$input: ProductCreateInput!) {
+    productCreate(input: \$input) {
         product {
             $product
         }
-    } 
+    }
 }
 GQL;
     }
@@ -140,18 +140,18 @@ GQL;
         $product = QueryObject::product();
 
         return <<<GQL
-mutation ProductPatchInput(\$input: ProductPatchInput!) { 
-    productPatch(input: \$input) { 
+mutation ProductPatchInput(\$input: ProductPatchInput!) {
+    productPatch(input: \$input) {
         product {
-            $product 
+            $product
         }
-        didSucceed 
-        inputErrors { 
-            message 
-            path 
-            code 
-        } 
-    } 
+        didSucceed
+        inputErrors {
+            message
+            path
+            code
+        }
+    }
 }
 GQL;
     }
@@ -161,18 +161,18 @@ GQL;
         $product = QueryObject::product();
 
         return <<<GQL
-mutation ProductArchiveInput(\$input: ProductArchiveInput!) { 
-    productArchive(input: \$input) { 
+mutation ProductArchiveInput(\$input: ProductArchiveInput!) {
+    productArchive(input: \$input) {
         product {
             $product
         }
-        didSucceed 
-        inputErrors { 
-            path 
-            message 
-            code 
-        } 
-    } 
+        didSucceed
+        inputErrors {
+            path
+            message
+            code
+        }
+    }
 }
 GQL;
     }
@@ -182,18 +182,18 @@ GQL;
         $salesTax = QueryObject::salesTax();
 
         return <<<GQL
-mutation SalesTaxCreateInput(\$input: SalesTaxCreateInput!) { 
-    salesTaxCreate(input: \$input) { 
+mutation SalesTaxCreateInput(\$input: SalesTaxCreateInput!) {
+    salesTaxCreate(input: \$input) {
         salesTax {
             $salesTax
         }
-        didSucceed 
-        inputErrors { 
-            path 
-            message 
-            code 
-        } 
-    } 
+        didSucceed
+        inputErrors {
+            path
+            message
+            code
+        }
+    }
 }
 GQL;
     }
@@ -203,18 +203,18 @@ GQL;
         $salesTax = QueryObject::salesTax();
 
         return <<<GQL
-mutation SalesTaxPatchInput(\$input: SalesTaxPatchInput!) { 
-    salesTaxPatch(input: \$input) { 
+mutation SalesTaxPatchInput(\$input: SalesTaxPatchInput!) {
+    salesTaxPatch(input: \$input) {
         salesTax {
             $salesTax
-        } 
-        didSucceed 
-        inputErrors { 
-            path 
-            message 
-            code 
-        } 
-    } 
+        }
+        didSucceed
+        inputErrors {
+            path
+            message
+            code
+        }
+    }
 }
 GQL;
     }
@@ -224,18 +224,18 @@ GQL;
         $salesTax = QueryObject::salesTax();
 
         return <<<GQL
-mutation SalesTaxArchiveInput(\$input: SalesTaxArchiveInput!) { 
-    salesTaxArchive(input: \$input) { 
+mutation SalesTaxArchiveInput(\$input: SalesTaxArchiveInput!) {
+    salesTaxArchive(input: \$input) {
         salesTax {
             $salesTax
         }
-        didSucceed 
-        inputErrors { 
-            path 
-            message 
-            code 
-        } 
-    } 
+        didSucceed
+        inputErrors {
+            path
+            message
+            code
+        }
+    }
 }
 GQL;
     }
@@ -243,15 +243,15 @@ GQL;
     public static function salesTaxRateCreate()
     {
         return <<<GQL
-mutation SalesTaxRateCreateInput(\$input: SalesTaxRateCreateInput!) { 
-    salesTaxRateCreate(input: \$input) { 
-        didSucceed 
-        inputErrors { 
-            path 
-            message 
-            code 
-        } 
-    } 
+mutation SalesTaxRateCreateInput(\$input: SalesTaxRateCreateInput!) {
+    salesTaxRateCreate(input: \$input) {
+        didSucceed
+        inputErrors {
+            path
+            message
+            code
+        }
+    }
 }
 GQL;
     }
@@ -261,18 +261,18 @@ GQL;
         $transaction = QueryObject::transaction();
 
         return <<<GQL
-mutation MoneyTransactionCreateInput(\$input: MoneyTransactionCreateInput!) { 
-    moneyTransactionCreate(input: \$input) { 
+mutation MoneyTransactionCreateInput(\$input: MoneyTransactionCreateInput!) {
+    moneyTransactionCreate(input: \$input) {
         transaction {
             $transaction
         }
-        didSucceed 
-        inputErrors { 
-            path 
-            message 
-            code 
-        } 
-    } 
+        didSucceed
+        inputErrors {
+            path
+            message
+            code
+        }
+    }
 }
 GQL;
     }
@@ -282,18 +282,18 @@ GQL;
         $invoice = QueryObject::invoice();
 
         return <<<GQL
-mutation InvoiceCreateInput(\$input: InvoiceCreateInput!) { 
-    invoiceCreate(input: \$input) { 
+mutation InvoiceCreateInput(\$input: InvoiceCreateInput!) {
+    invoiceCreate(input: \$input) {
         invoice {
             $invoice
         }
-        didSucceed 
-        inputErrors { 
-            path 
-            message 
-            code 
-        } 
-    } 
+        didSucceed
+        inputErrors {
+            path
+            message
+            code
+        }
+    }
 }
 GQL;
     }
@@ -310,8 +310,8 @@ mutation InvoiceCloneInput(\$input: InvoiceCloneInput!) {
         }
         didSucceed
         inputErrors {
-            path 
-            message 
+            path
+            message
             code
         }
     }
@@ -322,15 +322,15 @@ GQL;
     public static function invoiceDelete()
     {
         return <<<GQL
-mutation InvoiceDeleteInput(\$input: InvoiceDeleteInput!) { 
-    invoiceDelete(input: \$input) { 
-        didSucceed 
-        inputErrors { 
-            path 
-            message 
-            code 
-        } 
-    } 
+mutation InvoiceDeleteInput(\$input: InvoiceDeleteInput!) {
+    invoiceDelete(input: \$input) {
+        didSucceed
+        inputErrors {
+            path
+            message
+            code
+        }
+    }
 }
 GQL;
     }
@@ -338,15 +338,15 @@ GQL;
     public static function invoiceSend()
     {
         return <<<GQL
-mutation InvoiceSendInput(\$input: InvoiceSendInput!) { 
-    invoiceSend(input: \$input) { 
-        didSucceed 
-        inputErrors { 
-            path 
-            message 
-            code 
-        } 
-    } 
+mutation InvoiceSendInput(\$input: InvoiceSendInput!) {
+    invoiceSend(input: \$input) {
+        didSucceed
+        inputErrors {
+            path
+            message
+            code
+        }
+    }
 }
 GQL;
     }
@@ -356,18 +356,18 @@ GQL;
         $invoice = QueryObject::invoice();
 
         return <<<GQL
-mutation InvoiceApproveInput(\$input: InvoiceApproveInput!) { 
-    invoiceApprove(input: \$input) { 
+mutation InvoiceApproveInput(\$input: InvoiceApproveInput!) {
+    invoiceApprove(input: \$input) {
         invoice {
-            $invoice 
+            $invoice
         }
-        didSucceed 
-        inputErrors { 
-            path 
-            message 
-            code 
-        } 
-    } 
+        didSucceed
+        inputErrors {
+            path
+            message
+            code
+        }
+    }
 }
 GQL;
     }
@@ -377,18 +377,18 @@ GQL;
         $invoice = QueryObject::invoice();
 
         return <<<GQL
-mutation InvoiceMarkSentInput(\$input: InvoiceMarkSentInput!) { 
-    invoiceMarkSent(input: \$input) { 
+mutation InvoiceMarkSentInput(\$input: InvoiceMarkSentInput!) {
+    invoiceMarkSent(input: \$input) {
         invoice {
             $invoice
         }
-        didSucceed 
-        inputErrors { 
-            path 
-            message 
-            code 
-        } 
-    } 
+        didSucceed
+        inputErrors {
+            path
+            message
+            code
+        }
+    }
 }
 GQL;
     }

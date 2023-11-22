@@ -1,40 +1,41 @@
 {
-  "name": "subbe/waveapp",
-  "description": "A Wrapper to consume WaveApp's GraphQL API",
-  "type": "project",
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Mohamed Suhaib",
-      "email": "mohamed.suhaib@gmail.com"
+    "name": "jeffgreco13/laravel-wave",
+    "description": "A wrapper to use the Wave GraphQL API in your Laravel apps.",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jeff Greco",
+            "email": "jeff@jeffpgreco.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Jeffgreco13\\Wave\\": "src/"
+        }
+    },
+    "require": {
+        "guzzlehttp/guzzle": ">=6.0",
+        "laravel/framework": ">=9.0"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Jeffgreco13\\Wave\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Jeffgreco13\\Wave\\WaveServiceProvider"
+            ],
+            "aliases": {
+                "Wave": "Jeffgreco13\\Wave\\Wave"
+            }
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.3",
+        "orchestra/testbench": "~3.0"
     }
-  ],
-  "minimum-stability": "dev",
-  "autoload": {
-    "psr-4": {
-      "Subbe\\WaveApp\\": "src/"
-    }
-  },
-  "require": {
-    "guzzlehttp/guzzle": ">=6.0"
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Subbe\\WaveApp\\Tests\\": "tests/"
-    }
-  },
-  "extra": {
-    "laravel": {
-      "providers": [
-        "Subbe\\WaveApp\\WaveAppServiceProvider"
-      ],
-      "aliases": {
-        "WaveApp": "Subbe\\WaveApp\\WaveApp"
-      }
-    }
-  },
-  "require-dev": {
-    "phpunit/phpunit": "^8.3",
-    "orchestra/testbench": "~3.0"
-  }
 }

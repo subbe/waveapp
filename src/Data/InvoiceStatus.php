@@ -1,6 +1,6 @@
 <?php
 
-namespace Subbe\WaveApp;
+namespace Jeffgreco13\Wave;
 
 class InvoiceStatus
 {
