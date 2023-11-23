@@ -1,6 +1,6 @@
 # Laravel Wave
 
-A wrapper to use the [Wave][wave-app]'s graphql api in your laravel apps.
+A wrapper to use the [Wave][wave-app]'s graphql api in your laravel apps. This package was forked from [subbe/waveapp][subbe-waveapp] and adds some QOL improvements for Laravel devs.
 
 Wave API documentation can be located at:
 
@@ -87,24 +87,38 @@ php artisan tinker
 ### Query
 
 ```php
-$Wave = new \Jeffgreco13\Wave\Wave();
-$countries = $Wave->countries();
+$wave = new \Jeffgreco13\Wave\Wave();
+$businesses = $wave->businesses();
 ```
 
 or, with parameters...
 
 ```php
-$Wave = new \Jeffgreco13\Wave\Wave();
-$country = $Wave->country(['code' => 'US']);
+$wave = new \Jeffgreco13\Wave\Wave();
+$country = $wave->country(['code' => 'US']);
+```
+
+### Pagination
+
+Queries like `businesses` and `customers` may require pagination. You can easily build your own loop and increment the 'page' input, or you can use this shortcut:
+
+```php
+$wave = new Wave();
+$response = $wave->customers(['pageSize'=>20]);
+do {
+    foreach ($wave->getNodes() as $node) {
+        echo "Hello, {$node->firstName}!";
+    }
+} while($response = $wave->paginate());
 ```
 
 ### Mutation
 
 ```php
-$Wave = new \Jeffgreco13\Wave\Wave();
+$wave = new \Jeffgreco13\Wave\Wave();
 $customer = [
     "input" => [
-        "businessId" => "<REPLACE-THIS-WITH-THE-BUSINESS-ID>",
+        "businessId" => null, // Optional. Will use the businessId from your config/env by default
         "name" => "Genevieve Heidenreich",
         "firstName" => "Genevieve",
         "lastName" => "Heidenreich",
@@ -141,7 +155,7 @@ $customer = [
     ],
 ];
 
-$newCustomer = $Wave->customerCreate($customer, "CustomerCreateInput");
+$newCustomer = $wave->customerCreate($customer);
 ```
 
 ## Contributing
@@ -161,3 +175,5 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 [wave-create-an-app]: https://developer.waveapps.com/hc/en-us/articles/360019762711
 
 [socialite-wave]: https://github.com/SocialiteProviders/Providers/tree/master/src/Wave
+
+[subbe-waveapp]: https://github.com/subbe/waveapp

@@ -241,6 +241,18 @@ currency {
 shippingDetails {
     $shippingDetails
 }
+outstandingAmount {
+    value
+    currency {
+        code
+    }
+}
+overdueAmount {
+    value
+    currency {
+        code
+    }
+}
 createdAt
 modifiedAt
 isArchived

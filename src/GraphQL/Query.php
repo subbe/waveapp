@@ -201,7 +201,7 @@ GQL;
         $product = QueryObject::product();
 
         return <<<GQL
-query (\$businessId: ID!) {
+query (\$businessId: ID!, \$page: Int = 1, \$pageSize: Int = 10) {
     business(id: \$businessId) {
         products {
             edges {
