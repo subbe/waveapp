@@ -38,7 +38,39 @@ php artisan tinker
 > (new \Jeffgreco13\Wave\Wave())->businesses()
 ```
 
-### Queries
+## Usage
+
+### Currency
+
+A simple way to download Wave's currencies and cache them for use in your app:
+
+First run the artisan command. This downloads the static currencies to a json file and saves them in your storage path:
+
+```
+php artisan wave:pull-currencies
+```
+You may now use the Currency class like so:
+
+```php
+use Jeffgreco13\Wave\Currency;
+
+$currencies = Currency::all(); // returns a Collection of Currency objects
+
+$currency = Currency::firstWhere('code','ARS'); // returns a single Currency object if found, or null
+echo $currency->name; // output: Argentinian peso
+
+// Currency array attributes
+array:5 [
+  "code" => "ARS"
+  "symbol" => "$"
+  "name" => "Argentinian peso"
+  "plural" => "Argentinian pesos"
+  "exponent" => 2
+]
+
+```
+
+### All Queries
 
 - user
 - countries
@@ -54,7 +86,7 @@ php artisan tinker
 - products
 - taxes
 
-### Mutations
+### All Mutations
 
 - customerCreate
 - customerPatch
