@@ -429,6 +429,18 @@ description
 unitPrice
 isSold
 isBought
+incomeAccount {
+    id
+    name
+}
+expenseAccount {
+    id
+    name
+}
+defaultSalesTaxes {
+    id
+    name
+}
 isArchived
 createdAt
 modifiedAt
