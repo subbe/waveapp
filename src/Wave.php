@@ -83,12 +83,11 @@ class Wave
             // If this query has pagination, set defaults that we can use later.
             if (in_array($this->cachedMethod,$this->requestsWithPagination)){
                 $this->cachedVariables['page'] = data_get($this->cachedVariables,'page',null) ?? 1;
-                $this->cachedVariables['pageSize'] = data_get($this->cachedVariables, 'pageSize', null) ?? 5;
+                $this->cachedVariables['pageSize'] = data_get($this->cachedVariables, 'pageSize', null) ?? 10;
             }
         } else {
             throw new Exception('This method does not exist or has not been set up yet.');
         }
-
         // Make the request
         $response = $this->client->post($this->url, [
             'query' => $this->cachedQuery,
@@ -115,6 +114,8 @@ class Wave
                 case 'INTERNAL_SERVER_ERROR':
                     throw new Exceptions\ExecutionException("Execution error: {$message}");
                     break;
+                case 'VARIABLE_VALUE':
+                    throw new \Exception("Incorrect values provided: {$message}");
                 default:
                     throw new \Exception('Wave GraphQL request failed with an unknown error.');
             }

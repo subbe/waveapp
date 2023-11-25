@@ -1,6 +1,6 @@
 <?php
 
-namespace Jeffgreco13\LaravelWave\Exceptions;
+namespace Jeffgreco13\Wave\Exceptions;
 
 use Exception;
 

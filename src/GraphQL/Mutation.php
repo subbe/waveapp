@@ -127,6 +127,12 @@ GQL;
         return <<<GQL
 mutation ProductCreateInput(\$input: ProductCreateInput!) {
     productCreate(input: \$input) {
+        didSucceed
+        inputErrors {
+            code
+            message
+            path
+        }
         product {
             $product
         }
